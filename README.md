@@ -4,7 +4,7 @@ Este repositorio tem como objetivo colocar os TPC's e trabalhos feitos no ambito
 Este repositorio tem como autor o aluno
 A108559 João Pedro da Silva Taveira
 
-#TPC
+# TPC
 [TPC1](/TPC1/)
 [TPC2](/TPC2/)
 [TPC3](/TPC3/)
