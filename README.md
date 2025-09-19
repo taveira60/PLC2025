@@ -1,22 +1,16 @@
 # PLC2025
-Este repositorio tem como objetivo colocar os TPC's e trabalhos feitos no ambito da disciplina de **Processamento de Linguagens e Compiladores**.
 
-Este repositorio tem como autor o aluno
-A108559 João Pedro da Silva Taveira
+Este repositório tem como objetivo disponibilizar os Trabalhos Práticos Contínuos (TPCs) e outros trabalhos realizados no âmbito da unidade curricular de **Processamento de Linguagens e Compiladores**.
 
-# TPC
-[TPC1](/TPC1/)
+Este repositório é da autoria do aluno **João Pedro da Silva Taveira**, com o número **A108559**.
 
-[TPC2](/TPC2/)
+## Trabalhos Práticos (TPC)
 
-[TPC3](/TPC3/)
-
-[TPC4](/TPC4/)
-
-[TPC5](/TPC5/)
-
-[TPC6](/TPC6/)
-
-[TPC7](/TPC7/)
-
-[TPC8](/TPC8/)
+- [TPC1](/TPC1/)
+- [TPC2](/TPC2/)
+- [TPC3](/TPC3/)
+- [TPC4](/TPC4/)
+- [TPC5](/TPC5/)
+- [TPC6](/TPC6/)
+- [TPC7](/TPC7/)
+- [TPC8](/TPC8/)
