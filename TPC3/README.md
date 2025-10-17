@@ -1,2 +1,2 @@
-# TPC3
-[RESOLUÇÃO](TPC3.ipynb)
+# TPC2
+[RESOLUÇÃO](Tpc2.ipynb)
