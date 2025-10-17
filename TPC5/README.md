@@ -1,9 +1,9 @@
 # TPC5
 Neste trabalho desenvolvi três ficheiros principais:
 
-- **stock** ([stock.json])  
-- **lexer** ([lexer.py])  
-- **vending** ([vending.py])  
+- **stock** (stock.json)  
+- **lexer** (lexer.py)  
+- **vending** (vending.py)  
 
 O ficheiro **stock** é responsável pela gestão do inventário da máquina, incluindo o carregamento e a atualização do ficheiro `stock.json`, que armazena os produtos, quantidades e preços disponíveis.
 
