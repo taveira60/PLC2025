@@ -1,9 +1,9 @@
-from expr_aritm_analex import lexer
+from lexer import lexer
 
 prox_simb = None
 
 def parserError(simb):
-    print("Erro sintático, token inesperado:", simb)
+    print("Erro sintático, token invalido:", simb)
 
 def rec_term(simb):
     global prox_simb
@@ -12,7 +12,7 @@ def rec_term(simb):
     else:
         parserError(prox_simb)
 
-# Ideia da gramática:
+
 '''
 E  → T E2
 E2 → + T E2 
@@ -26,7 +26,6 @@ F  → NUM
     | ( E )
 '''       
 
-# ---------- Produções ----------
 
 def rec_E():
     print("Derivando por: E → T E2")
