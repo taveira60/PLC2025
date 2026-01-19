@@ -11,6 +11,8 @@ Este repositório é da autoria do aluno **João Pedro da Silva Taveira**, com o
 - [TPC3](/TPC3/)
 - [TPC4](/TPC4/)
 - [TPC5](/TPC5/)
-- [TPC6](/TPC6/)
-- [TPC7](/TPC7/)(ainda nao lançado)
-- [TPC8](/TPC8/)(ainda nao lançado)
+- [TPC6](/TPC6/)´
+
+## Projeto (Compilador Pascal)
+
+- [PROJETO](/Projeto/)
