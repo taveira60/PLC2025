@@ -1,0 +1,128 @@
+
+p1 : S            : "program" ID ";" FDECLS B "."
+
+p2 : FDECLS       : FDECLS FUNCTION_DECL
+                  | FDECLS PROCEDURE_DECL
+p3 :              |  empty 
+
+    PRODUCTION_DECL : "procedure" ID "(" FPARAMS ")" ";" FBLOCK
+
+p4 : FUNCTION_DECL : "function" ID "(" FPARAMS ")" ":" TIPO ";" FBLOCK
+
+p5 : FPARAMS      : PARAM_LIST
+p6 :              |  empty 
+
+p7 : PARAM_LIST   : PARAM_LIST "," PARAM
+p8 :              | PARAM
+
+p9 : PARAM        : ID ":" TIPO
+
+
+p10: FBLOCK       : "var" DL "begin" CL "end" ";"
+p11:              | "begin" CL "end" ";"
+
+p12: B            : "var" DL "begin" CL "end"
+p13:              | "begin" CL "end"
+
+
+p14: DL           : DL ";" D
+p15:              | D
+
+p16: D            : VL ":" TIPO
+
+p17: VL           : VL "," ID
+p18:              | ID
+
+
+p19: TIPO         : BASE_TIPO
+p20:              | ARRAY_TIPO
+
+p21: BASE_TIPO    : "integer"
+p22:              | "boolean"
+p23:              | "string"
+
+
+p24: ARRAY_TIPO   : "array" "[" INDEX ".." INDEX "]" "of" BASE_TIPO
+
+p25: INDEX        : NUMS
+p26:              | "-" NUMS
+
+
+p27: CL           : CL ";" C
+p28:              | C
+
+p29: C            : Write
+p30:              | Read
+p31:              | Assign
+p32:              | For
+p33:              | While
+p34:              | If
+p35:              | "begin" CL "end"
+                  | ID "(" AL ")"
+                  | ID
+p36:              |  empty 
+
+
+p37: Write        : "writeln" "(" AL ")"
+
+p38: Read         : "readln" "(" LVALUE_LIST ")"
+
+p39: LVALUE_LIST  : LVALUE_LIST "," LVALUE
+p40:              | LVALUE
+
+p41: Assign       : LVALUE ":=" E
+
+p42: For          : "for" ID ":=" E FORDIR E "do" C
+
+p43: FORDIR       : "to"
+p44:              | "downto"
+
+p45: While        : "while" E "do" C
+
+p46: If           : "if" E "then" C ELSEOPT
+
+p47: ELSEOPT      : "else" C
+p48:              |  empty 
+
+p49: LVALUE       : LVALUE "[" E "]"
+p50:              | ID
+
+p51: AL           : AL "," E
+p52:              | E
+
+p53: E            : E "or" E1
+p54:              | E1
+
+p55: E1           : E1 "and" E2
+p56:              | E2
+
+p57: E2           : A "<" A
+p58:              | A ">" A
+p59:              | A ">=" A
+p60:              | A "<=" A
+p61:              | A "<>" A
+p62:              | A "=" A
+p63:              | A
+
+p64: A            : A "+" T
+p65:              | A "-" T
+p66:              | T
+
+p67: T            : T "*" F
+p68:              | T "div" F
+p69:              | T "mod" F
+p70:              | F
+
+p71: F            : ID "(" AL ")"    
+p72:              | LVALUE           
+p73:              | NUMS
+p74:              | STRINGS
+p75:              | "(" E ")"
+p76:              | "true"
+p77:              | "false"
+                  | "not" F
+                  | "-" F
+                  | "+" F
+
+
+

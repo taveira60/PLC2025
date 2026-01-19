@@ -1,0 +1,4424 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> S
+Rule 1     empty -> <empty>
+Rule 2     S -> PROGRAM ID SEMICOLON FDECLS B DOT
+Rule 3     FDECLS -> FDECLS FUNCTION_DECL
+Rule 4     FDECLS -> FDECLS PROCEDURE_DECL
+Rule 5     FDECLS -> empty
+Rule 6     FUNCTION_DECL -> FUNCTION ID PA FPARAMS PF DOUBLEDOT TIPO SEMICOLON FBLOCK
+Rule 7     PROCEDURE_DECL -> PROCEDURE ID PA FPARAMS PF SEMICOLON FBLOCK
+Rule 8     PROCEDURE_DECL -> PROCEDURE ID SEMICOLON FBLOCK
+Rule 9     FPARAMS -> PARAM_LIST
+Rule 10    FPARAMS -> empty
+Rule 11    PARAM_LIST -> PARAM_LIST COMMA PARAM
+Rule 12    PARAM_LIST -> PARAM
+Rule 13    PARAM -> ID DOUBLEDOT TIPO
+Rule 14    FBLOCK -> VAR DL BEGIN CL END SEMICOLON
+Rule 15    FBLOCK -> BEGIN CL END SEMICOLON
+Rule 16    B -> VAR DL BEGIN CL END
+Rule 17    B -> BEGIN CL END
+Rule 18    DL -> DL SEMICOLON D
+Rule 19    DL -> D
+Rule 20    D -> VL DOUBLEDOT TIPO
+Rule 21    D -> empty
+Rule 22    TIPO -> BASE_TIPO
+Rule 23    TIPO -> ARRAY_TIPO
+Rule 24    BASE_TIPO -> INTEGER
+Rule 25    BASE_TIPO -> BOOLEAN
+Rule 26    BASE_TIPO -> STRING
+Rule 27    BASE_TIPO -> REAL
+Rule 28    BASE_TIPO -> CHAR
+Rule 29    INDEX -> NUMS
+Rule 30    INDEX -> MINUS NUMS
+Rule 31    INDEX -> INDEX MINUS NUMS
+Rule 32    INDEX -> INDEX PLUS NUMS
+Rule 33    INDEX -> INDEX MULT NUMS
+Rule 34    INDEX -> INDEX DIV NUMS
+Rule 35    INDEX -> INDEX MOD NUMS
+Rule 36    ARRAY_TIPO -> ARRAY PRA INDEX RANGE INDEX PRF OF BASE_TIPO
+Rule 37    VL -> VL COMMA ID
+Rule 38    VL -> ID
+Rule 39    CL -> CL SEMICOLON C
+Rule 40    CL -> C
+Rule 41    Call -> ID PA AL PF
+Rule 42    Call -> ID
+Rule 43    C -> matched
+Rule 44    C -> unmatched
+Rule 45    matched -> IF E THEN matched ELSE matched
+Rule 46    matched -> CC
+Rule 47    unmatched -> IF E THEN C
+Rule 48    unmatched -> IF E THEN matched ELSE unmatched
+Rule 49    Repeat -> REPEAT C UNTIL E SEMICOLON
+Rule 50    Write -> WRITELN PA AL PF
+Rule 51    Read -> READLN PA LVALUE_LIST PF
+Rule 52    LVALUE_LIST -> LVALUE_LIST COMMA LVALUE
+Rule 53    LVALUE_LIST -> LVALUE
+Rule 54    Assign -> LVALUE DOTEDEQUALS E
+Rule 55    For -> FOR ID DOTEDEQUALS E FORDIR E DO C
+Rule 56    FORDIR -> TO
+Rule 57    FORDIR -> DOWNTO
+Rule 58    While -> WHILE E DO C
+Rule 59    CC -> Write
+Rule 60    CC -> Read
+Rule 61    CC -> Assign
+Rule 62    CC -> For
+Rule 63    CC -> While
+Rule 64    CC -> Call
+Rule 65    CC -> Repeat
+Rule 66    CC -> BEGIN CL END
+Rule 67    CC -> empty
+Rule 68    LVALUE -> LVALUE PRA E PRF
+Rule 69    LVALUE -> ID
+Rule 70    AL -> AL COMMA E
+Rule 71    AL -> E
+Rule 72    E -> E OR E1
+Rule 73    E -> E1
+Rule 74    E1 -> E1 AND E2
+Rule 75    E1 -> E2
+Rule 76    E2 -> A MENOR A
+Rule 77    E2 -> A MAIOR A
+Rule 78    E2 -> A MAIORIGUAL A
+Rule 79    E2 -> A MENORIGUAL A
+Rule 80    E2 -> A DIFERENTE A
+Rule 81    E2 -> A EQUALS A
+Rule 82    E2 -> A
+Rule 83    A -> A PLUS T
+Rule 84    A -> A MINUS T
+Rule 85    A -> T
+Rule 86    T -> T MULT F
+Rule 87    T -> T DIV F
+Rule 88    T -> T MOD F
+Rule 89    T -> F
+Rule 90    F -> ID PA AL PF
+Rule 91    F -> LVALUE
+Rule 92    F -> NUMS
+Rule 93    F -> NUM_REAL
+Rule 94    F -> STRINGS
+Rule 95    F -> PA E PF
+Rule 96    F -> TRUE
+Rule 97    F -> FALSE
+Rule 98    F -> NOT F
+Rule 99    F -> MINUS F
+Rule 100   F -> PLUS F
+
+Terminals, with rules where they appear
+
+AND                  : 74
+ARRAY                : 36
+BEGIN                : 14 15 16 17 66
+BOOLEAN              : 25
+CHAR                 : 28
+COMMA                : 11 37 52 70
+DIFERENTE            : 80
+DIV                  : 34 87
+DO                   : 55 58
+DOT                  : 2
+DOTEDEQUALS          : 54 55
+DOUBLEDOT            : 6 13 20
+DOWNTO               : 57
+ELSE                 : 45 48
+END                  : 14 15 16 17 66
+EQUALS               : 81
+FALSE                : 97
+FOR                  : 55
+FUNCTION             : 6
+ID                   : 2 6 7 8 13 37 38 41 42 55 69 90
+IF                   : 45 47 48
+INTEGER              : 24
+MAIOR                : 77
+MAIORIGUAL           : 78
+MENOR                : 76
+MENORIGUAL           : 79
+MINUS                : 30 31 84 99
+MOD                  : 35 88
+MULT                 : 33 86
+NOT                  : 98
+NUMS                 : 29 30 31 32 33 34 35 92
+NUM_REAL             : 93
+OF                   : 36
+OR                   : 72
+PA                   : 6 7 41 50 51 90 95
+PF                   : 6 7 41 50 51 90 95
+PLUS                 : 32 83 100
+PRA                  : 36 68
+PRF                  : 36 68
+PROCEDURE            : 7 8
+PROGRAM              : 2
+RANGE                : 36
+READLN               : 51
+REAL                 : 27
+REPEAT               : 49
+SEMICOLON            : 2 6 7 8 14 15 18 39 49
+STRING               : 26
+STRINGS              : 94
+THEN                 : 45 47 48
+TO                   : 56
+TRUE                 : 96
+UNTIL                : 49
+VAR                  : 14 16
+WHILE                : 58
+WRITELN              : 50
+error                : 
+
+Nonterminals, with rules where they appear
+
+A                    : 76 76 77 77 78 78 79 79 80 80 81 81 82 83 84
+AL                   : 41 50 70 90
+ARRAY_TIPO           : 23
+Assign               : 61
+B                    : 2
+BASE_TIPO            : 22 36
+C                    : 39 40 47 49 55 58
+CC                   : 46
+CL                   : 14 15 16 17 39 66
+Call                 : 64
+D                    : 18 19
+DL                   : 14 16 18
+E                    : 45 47 48 49 54 55 55 58 68 70 71 72 95
+E1                   : 72 73 74
+E2                   : 74 75
+F                    : 86 87 88 89 98 99 100
+FBLOCK               : 6 7 8
+FDECLS               : 2 3 4
+FORDIR               : 55
+FPARAMS              : 6 7
+FUNCTION_DECL        : 3
+For                  : 62
+INDEX                : 31 32 33 34 35 36 36
+LVALUE               : 52 53 54 68 91
+LVALUE_LIST          : 51 52
+PARAM                : 11 12
+PARAM_LIST           : 9 11
+PROCEDURE_DECL       : 4
+Read                 : 60
+Repeat               : 65
+S                    : 0
+T                    : 83 84 85 86 87 88
+TIPO                 : 6 13 20
+VL                   : 20 37
+While                : 63
+Write                : 59
+empty                : 5 10 21 67
+matched              : 43 45 45 48
+unmatched            : 44 48
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . S
+    (2) S -> . PROGRAM ID SEMICOLON FDECLS B DOT
+
+    PROGRAM         shift and go to state 2
+
+    S                              shift and go to state 1
+
+state 1
+
+    (0) S' -> S .
+
+
+
+state 2
+
+    (2) S -> PROGRAM . ID SEMICOLON FDECLS B DOT
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (2) S -> PROGRAM ID . SEMICOLON FDECLS B DOT
+
+    SEMICOLON       shift and go to state 4
+
+
+state 4
+
+    (2) S -> PROGRAM ID SEMICOLON . FDECLS B DOT
+    (3) FDECLS -> . FDECLS FUNCTION_DECL
+    (4) FDECLS -> . FDECLS PROCEDURE_DECL
+    (5) FDECLS -> . empty
+    (1) empty -> .
+
+    VAR             reduce using rule 1 (empty -> .)
+    BEGIN           reduce using rule 1 (empty -> .)
+    FUNCTION        reduce using rule 1 (empty -> .)
+    PROCEDURE       reduce using rule 1 (empty -> .)
+
+    FDECLS                         shift and go to state 5
+    empty                          shift and go to state 6
+
+state 5
+
+    (2) S -> PROGRAM ID SEMICOLON FDECLS . B DOT
+    (3) FDECLS -> FDECLS . FUNCTION_DECL
+    (4) FDECLS -> FDECLS . PROCEDURE_DECL
+    (16) B -> . VAR DL BEGIN CL END
+    (17) B -> . BEGIN CL END
+    (6) FUNCTION_DECL -> . FUNCTION ID PA FPARAMS PF DOUBLEDOT TIPO SEMICOLON FBLOCK
+    (7) PROCEDURE_DECL -> . PROCEDURE ID PA FPARAMS PF SEMICOLON FBLOCK
+    (8) PROCEDURE_DECL -> . PROCEDURE ID SEMICOLON FBLOCK
+
+    VAR             shift and go to state 10
+    BEGIN           shift and go to state 11
+    FUNCTION        shift and go to state 12
+    PROCEDURE       shift and go to state 13
+
+    B                              shift and go to state 7
+    FUNCTION_DECL                  shift and go to state 8
+    PROCEDURE_DECL                 shift and go to state 9
+
+state 6
+
+    (5) FDECLS -> empty .
+
+    VAR             reduce using rule 5 (FDECLS -> empty .)
+    BEGIN           reduce using rule 5 (FDECLS -> empty .)
+    FUNCTION        reduce using rule 5 (FDECLS -> empty .)
+    PROCEDURE       reduce using rule 5 (FDECLS -> empty .)
+
+
+state 7
+
+    (2) S -> PROGRAM ID SEMICOLON FDECLS B . DOT
+
+    DOT             shift and go to state 14
+
+
+state 8
+
+    (3) FDECLS -> FDECLS FUNCTION_DECL .
+
+    VAR             reduce using rule 3 (FDECLS -> FDECLS FUNCTION_DECL .)
+    BEGIN           reduce using rule 3 (FDECLS -> FDECLS FUNCTION_DECL .)
+    FUNCTION        reduce using rule 3 (FDECLS -> FDECLS FUNCTION_DECL .)
+    PROCEDURE       reduce using rule 3 (FDECLS -> FDECLS FUNCTION_DECL .)
+
+
+state 9
+
+    (4) FDECLS -> FDECLS PROCEDURE_DECL .
+
+    VAR             reduce using rule 4 (FDECLS -> FDECLS PROCEDURE_DECL .)
+    BEGIN           reduce using rule 4 (FDECLS -> FDECLS PROCEDURE_DECL .)
+    FUNCTION        reduce using rule 4 (FDECLS -> FDECLS PROCEDURE_DECL .)
+    PROCEDURE       reduce using rule 4 (FDECLS -> FDECLS PROCEDURE_DECL .)
+
+
+state 10
+
+    (16) B -> VAR . DL BEGIN CL END
+    (18) DL -> . DL SEMICOLON D
+    (19) DL -> . D
+    (20) D -> . VL DOUBLEDOT TIPO
+    (21) D -> . empty
+    (37) VL -> . VL COMMA ID
+    (38) VL -> . ID
+    (1) empty -> .
+
+    ID              shift and go to state 19
+    BEGIN           reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+
+    DL                             shift and go to state 15
+    D                              shift and go to state 16
+    VL                             shift and go to state 17
+    empty                          shift and go to state 18
+
+state 11
+
+    (17) B -> BEGIN . CL END
+    (39) CL -> . CL SEMICOLON C
+    (40) CL -> . C
+    (43) C -> . matched
+    (44) C -> . unmatched
+    (45) matched -> . IF E THEN matched ELSE matched
+    (46) matched -> . CC
+    (47) unmatched -> . IF E THEN C
+    (48) unmatched -> . IF E THEN matched ELSE unmatched
+    (59) CC -> . Write
+    (60) CC -> . Read
+    (61) CC -> . Assign
+    (62) CC -> . For
+    (63) CC -> . While
+    (64) CC -> . Call
+    (65) CC -> . Repeat
+    (66) CC -> . BEGIN CL END
+    (67) CC -> . empty
+    (50) Write -> . WRITELN PA AL PF
+    (51) Read -> . READLN PA LVALUE_LIST PF
+    (54) Assign -> . LVALUE DOTEDEQUALS E
+    (55) For -> . FOR ID DOTEDEQUALS E FORDIR E DO C
+    (58) While -> . WHILE E DO C
+    (41) Call -> . ID PA AL PF
+    (42) Call -> . ID
+    (49) Repeat -> . REPEAT C UNTIL E SEMICOLON
+    (1) empty -> .
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    IF              shift and go to state 25
+    BEGIN           shift and go to state 20
+    WRITELN         shift and go to state 35
+    READLN          shift and go to state 36
+    FOR             shift and go to state 38
+    WHILE           shift and go to state 40
+    ID              shift and go to state 39
+    REPEAT          shift and go to state 41
+    END             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+
+    CL                             shift and go to state 21
+    C                              shift and go to state 22
+    matched                        shift and go to state 23
+    unmatched                      shift and go to state 24
+    CC                             shift and go to state 26
+    Write                          shift and go to state 27
+    Read                           shift and go to state 28
+    Assign                         shift and go to state 29
+    For                            shift and go to state 30
+    While                          shift and go to state 31
+    Call                           shift and go to state 32
+    Repeat                         shift and go to state 33
+    empty                          shift and go to state 34
+    LVALUE                         shift and go to state 37
+
+state 12
+
+    (6) FUNCTION_DECL -> FUNCTION . ID PA FPARAMS PF DOUBLEDOT TIPO SEMICOLON FBLOCK
+
+    ID              shift and go to state 42
+
+
+state 13
+
+    (7) PROCEDURE_DECL -> PROCEDURE . ID PA FPARAMS PF SEMICOLON FBLOCK
+    (8) PROCEDURE_DECL -> PROCEDURE . ID SEMICOLON FBLOCK
+
+    ID              shift and go to state 43
+
+
+state 14
+
+    (2) S -> PROGRAM ID SEMICOLON FDECLS B DOT .
+
+    $end            reduce using rule 2 (S -> PROGRAM ID SEMICOLON FDECLS B DOT .)
+
+
+state 15
+
+    (16) B -> VAR DL . BEGIN CL END
+    (18) DL -> DL . SEMICOLON D
+
+    BEGIN           shift and go to state 44
+    SEMICOLON       shift and go to state 45
+
+
+state 16
+
+    (19) DL -> D .
+
+    BEGIN           reduce using rule 19 (DL -> D .)
+    SEMICOLON       reduce using rule 19 (DL -> D .)
+
+
+state 17
+
+    (20) D -> VL . DOUBLEDOT TIPO
+    (37) VL -> VL . COMMA ID
+
+    DOUBLEDOT       shift and go to state 46
+    COMMA           shift and go to state 47
+
+
+state 18
+
+    (21) D -> empty .
+
+    BEGIN           reduce using rule 21 (D -> empty .)
+    SEMICOLON       reduce using rule 21 (D -> empty .)
+
+
+state 19
+
+    (38) VL -> ID .
+
+    DOUBLEDOT       reduce using rule 38 (VL -> ID .)
+    COMMA           reduce using rule 38 (VL -> ID .)
+
+
+state 20
+
+    (66) CC -> BEGIN . CL END
+    (39) CL -> . CL SEMICOLON C
+    (40) CL -> . C
+    (43) C -> . matched
+    (44) C -> . unmatched
+    (45) matched -> . IF E THEN matched ELSE matched
+    (46) matched -> . CC
+    (47) unmatched -> . IF E THEN C
+    (48) unmatched -> . IF E THEN matched ELSE unmatched
+    (59) CC -> . Write
+    (60) CC -> . Read
+    (61) CC -> . Assign
+    (62) CC -> . For
+    (63) CC -> . While
+    (64) CC -> . Call
+    (65) CC -> . Repeat
+    (66) CC -> . BEGIN CL END
+    (67) CC -> . empty
+    (50) Write -> . WRITELN PA AL PF
+    (51) Read -> . READLN PA LVALUE_LIST PF
+    (54) Assign -> . LVALUE DOTEDEQUALS E
+    (55) For -> . FOR ID DOTEDEQUALS E FORDIR E DO C
+    (58) While -> . WHILE E DO C
+    (41) Call -> . ID PA AL PF
+    (42) Call -> . ID
+    (49) Repeat -> . REPEAT C UNTIL E SEMICOLON
+    (1) empty -> .
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    IF              shift and go to state 25
+    BEGIN           shift and go to state 20
+    WRITELN         shift and go to state 35
+    READLN          shift and go to state 36
+    FOR             shift and go to state 38
+    WHILE           shift and go to state 40
+    ID              shift and go to state 39
+    REPEAT          shift and go to state 41
+    END             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+
+    CL                             shift and go to state 48
+    C                              shift and go to state 22
+    matched                        shift and go to state 23
+    unmatched                      shift and go to state 24
+    CC                             shift and go to state 26
+    Write                          shift and go to state 27
+    Read                           shift and go to state 28
+    Assign                         shift and go to state 29
+    For                            shift and go to state 30
+    While                          shift and go to state 31
+    Call                           shift and go to state 32
+    Repeat                         shift and go to state 33
+    empty                          shift and go to state 34
+    LVALUE                         shift and go to state 37
+
+state 21
+
+    (17) B -> BEGIN CL . END
+    (39) CL -> CL . SEMICOLON C
+
+    END             shift and go to state 49
+    SEMICOLON       shift and go to state 50
+
+
+state 22
+
+    (40) CL -> C .
+
+    END             reduce using rule 40 (CL -> C .)
+    SEMICOLON       reduce using rule 40 (CL -> C .)
+
+
+state 23
+
+    (43) C -> matched .
+
+    END             reduce using rule 43 (C -> matched .)
+    SEMICOLON       reduce using rule 43 (C -> matched .)
+    UNTIL           reduce using rule 43 (C -> matched .)
+    ELSE            reduce using rule 43 (C -> matched .)
+
+
+state 24
+
+    (44) C -> unmatched .
+
+    END             reduce using rule 44 (C -> unmatched .)
+    SEMICOLON       reduce using rule 44 (C -> unmatched .)
+    UNTIL           reduce using rule 44 (C -> unmatched .)
+    ELSE            reduce using rule 44 (C -> unmatched .)
+
+
+state 25
+
+    (45) matched -> IF . E THEN matched ELSE matched
+    (47) unmatched -> IF . E THEN C
+    (48) unmatched -> IF . E THEN matched ELSE unmatched
+    (72) E -> . E OR E1
+    (73) E -> . E1
+    (74) E1 -> . E1 AND E2
+    (75) E1 -> . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    E                              shift and go to state 51
+    E1                             shift and go to state 52
+    E2                             shift and go to state 53
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 26
+
+    (46) matched -> CC .
+
+    END             reduce using rule 46 (matched -> CC .)
+    SEMICOLON       reduce using rule 46 (matched -> CC .)
+    UNTIL           reduce using rule 46 (matched -> CC .)
+    ELSE            reduce using rule 46 (matched -> CC .)
+
+
+state 27
+
+    (59) CC -> Write .
+
+    END             reduce using rule 59 (CC -> Write .)
+    SEMICOLON       reduce using rule 59 (CC -> Write .)
+    UNTIL           reduce using rule 59 (CC -> Write .)
+    ELSE            reduce using rule 59 (CC -> Write .)
+
+
+state 28
+
+    (60) CC -> Read .
+
+    END             reduce using rule 60 (CC -> Read .)
+    SEMICOLON       reduce using rule 60 (CC -> Read .)
+    UNTIL           reduce using rule 60 (CC -> Read .)
+    ELSE            reduce using rule 60 (CC -> Read .)
+
+
+state 29
+
+    (61) CC -> Assign .
+
+    END             reduce using rule 61 (CC -> Assign .)
+    SEMICOLON       reduce using rule 61 (CC -> Assign .)
+    UNTIL           reduce using rule 61 (CC -> Assign .)
+    ELSE            reduce using rule 61 (CC -> Assign .)
+
+
+state 30
+
+    (62) CC -> For .
+
+    END             reduce using rule 62 (CC -> For .)
+    SEMICOLON       reduce using rule 62 (CC -> For .)
+    UNTIL           reduce using rule 62 (CC -> For .)
+    ELSE            reduce using rule 62 (CC -> For .)
+
+
+state 31
+
+    (63) CC -> While .
+
+    END             reduce using rule 63 (CC -> While .)
+    SEMICOLON       reduce using rule 63 (CC -> While .)
+    UNTIL           reduce using rule 63 (CC -> While .)
+    ELSE            reduce using rule 63 (CC -> While .)
+
+
+state 32
+
+    (64) CC -> Call .
+
+    END             reduce using rule 64 (CC -> Call .)
+    SEMICOLON       reduce using rule 64 (CC -> Call .)
+    UNTIL           reduce using rule 64 (CC -> Call .)
+    ELSE            reduce using rule 64 (CC -> Call .)
+
+
+state 33
+
+    (65) CC -> Repeat .
+
+    END             reduce using rule 65 (CC -> Repeat .)
+    SEMICOLON       reduce using rule 65 (CC -> Repeat .)
+    UNTIL           reduce using rule 65 (CC -> Repeat .)
+    ELSE            reduce using rule 65 (CC -> Repeat .)
+
+
+state 34
+
+    (67) CC -> empty .
+
+    END             reduce using rule 67 (CC -> empty .)
+    SEMICOLON       reduce using rule 67 (CC -> empty .)
+    UNTIL           reduce using rule 67 (CC -> empty .)
+    ELSE            reduce using rule 67 (CC -> empty .)
+
+
+state 35
+
+    (50) Write -> WRITELN . PA AL PF
+
+    PA              shift and go to state 68
+
+
+state 36
+
+    (51) Read -> READLN . PA LVALUE_LIST PF
+
+    PA              shift and go to state 69
+
+
+state 37
+
+    (54) Assign -> LVALUE . DOTEDEQUALS E
+    (68) LVALUE -> LVALUE . PRA E PRF
+
+    DOTEDEQUALS     shift and go to state 70
+    PRA             shift and go to state 71
+
+
+state 38
+
+    (55) For -> FOR . ID DOTEDEQUALS E FORDIR E DO C
+
+    ID              shift and go to state 72
+
+
+state 39
+
+    (41) Call -> ID . PA AL PF
+    (42) Call -> ID .
+    (69) LVALUE -> ID .
+
+    PA              shift and go to state 73
+    END             reduce using rule 42 (Call -> ID .)
+    SEMICOLON       reduce using rule 42 (Call -> ID .)
+    UNTIL           reduce using rule 42 (Call -> ID .)
+    ELSE            reduce using rule 42 (Call -> ID .)
+    DOTEDEQUALS     reduce using rule 69 (LVALUE -> ID .)
+    PRA             reduce using rule 69 (LVALUE -> ID .)
+
+
+state 40
+
+    (58) While -> WHILE . E DO C
+    (72) E -> . E OR E1
+    (73) E -> . E1
+    (74) E1 -> . E1 AND E2
+    (75) E1 -> . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    E                              shift and go to state 74
+    E1                             shift and go to state 52
+    E2                             shift and go to state 53
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 41
+
+    (49) Repeat -> REPEAT . C UNTIL E SEMICOLON
+    (43) C -> . matched
+    (44) C -> . unmatched
+    (45) matched -> . IF E THEN matched ELSE matched
+    (46) matched -> . CC
+    (47) unmatched -> . IF E THEN C
+    (48) unmatched -> . IF E THEN matched ELSE unmatched
+    (59) CC -> . Write
+    (60) CC -> . Read
+    (61) CC -> . Assign
+    (62) CC -> . For
+    (63) CC -> . While
+    (64) CC -> . Call
+    (65) CC -> . Repeat
+    (66) CC -> . BEGIN CL END
+    (67) CC -> . empty
+    (50) Write -> . WRITELN PA AL PF
+    (51) Read -> . READLN PA LVALUE_LIST PF
+    (54) Assign -> . LVALUE DOTEDEQUALS E
+    (55) For -> . FOR ID DOTEDEQUALS E FORDIR E DO C
+    (58) While -> . WHILE E DO C
+    (41) Call -> . ID PA AL PF
+    (42) Call -> . ID
+    (49) Repeat -> . REPEAT C UNTIL E SEMICOLON
+    (1) empty -> .
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    IF              shift and go to state 25
+    BEGIN           shift and go to state 20
+    WRITELN         shift and go to state 35
+    READLN          shift and go to state 36
+    FOR             shift and go to state 38
+    WHILE           shift and go to state 40
+    ID              shift and go to state 39
+    REPEAT          shift and go to state 41
+    UNTIL           reduce using rule 1 (empty -> .)
+
+    C                              shift and go to state 75
+    matched                        shift and go to state 23
+    unmatched                      shift and go to state 24
+    CC                             shift and go to state 26
+    Write                          shift and go to state 27
+    Read                           shift and go to state 28
+    Assign                         shift and go to state 29
+    For                            shift and go to state 30
+    While                          shift and go to state 31
+    Call                           shift and go to state 32
+    Repeat                         shift and go to state 33
+    empty                          shift and go to state 34
+    LVALUE                         shift and go to state 37
+
+state 42
+
+    (6) FUNCTION_DECL -> FUNCTION ID . PA FPARAMS PF DOUBLEDOT TIPO SEMICOLON FBLOCK
+
+    PA              shift and go to state 76
+
+
+state 43
+
+    (7) PROCEDURE_DECL -> PROCEDURE ID . PA FPARAMS PF SEMICOLON FBLOCK
+    (8) PROCEDURE_DECL -> PROCEDURE ID . SEMICOLON FBLOCK
+
+    PA              shift and go to state 77
+    SEMICOLON       shift and go to state 78
+
+
+state 44
+
+    (16) B -> VAR DL BEGIN . CL END
+    (39) CL -> . CL SEMICOLON C
+    (40) CL -> . C
+    (43) C -> . matched
+    (44) C -> . unmatched
+    (45) matched -> . IF E THEN matched ELSE matched
+    (46) matched -> . CC
+    (47) unmatched -> . IF E THEN C
+    (48) unmatched -> . IF E THEN matched ELSE unmatched
+    (59) CC -> . Write
+    (60) CC -> . Read
+    (61) CC -> . Assign
+    (62) CC -> . For
+    (63) CC -> . While
+    (64) CC -> . Call
+    (65) CC -> . Repeat
+    (66) CC -> . BEGIN CL END
+    (67) CC -> . empty
+    (50) Write -> . WRITELN PA AL PF
+    (51) Read -> . READLN PA LVALUE_LIST PF
+    (54) Assign -> . LVALUE DOTEDEQUALS E
+    (55) For -> . FOR ID DOTEDEQUALS E FORDIR E DO C
+    (58) While -> . WHILE E DO C
+    (41) Call -> . ID PA AL PF
+    (42) Call -> . ID
+    (49) Repeat -> . REPEAT C UNTIL E SEMICOLON
+    (1) empty -> .
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    IF              shift and go to state 25
+    BEGIN           shift and go to state 20
+    WRITELN         shift and go to state 35
+    READLN          shift and go to state 36
+    FOR             shift and go to state 38
+    WHILE           shift and go to state 40
+    ID              shift and go to state 39
+    REPEAT          shift and go to state 41
+    END             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+
+    CL                             shift and go to state 79
+    C                              shift and go to state 22
+    matched                        shift and go to state 23
+    unmatched                      shift and go to state 24
+    CC                             shift and go to state 26
+    Write                          shift and go to state 27
+    Read                           shift and go to state 28
+    Assign                         shift and go to state 29
+    For                            shift and go to state 30
+    While                          shift and go to state 31
+    Call                           shift and go to state 32
+    Repeat                         shift and go to state 33
+    empty                          shift and go to state 34
+    LVALUE                         shift and go to state 37
+
+state 45
+
+    (18) DL -> DL SEMICOLON . D
+    (20) D -> . VL DOUBLEDOT TIPO
+    (21) D -> . empty
+    (37) VL -> . VL COMMA ID
+    (38) VL -> . ID
+    (1) empty -> .
+
+    ID              shift and go to state 19
+    BEGIN           reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+
+    D                              shift and go to state 80
+    VL                             shift and go to state 17
+    empty                          shift and go to state 18
+
+state 46
+
+    (20) D -> VL DOUBLEDOT . TIPO
+    (22) TIPO -> . BASE_TIPO
+    (23) TIPO -> . ARRAY_TIPO
+    (24) BASE_TIPO -> . INTEGER
+    (25) BASE_TIPO -> . BOOLEAN
+    (26) BASE_TIPO -> . STRING
+    (27) BASE_TIPO -> . REAL
+    (28) BASE_TIPO -> . CHAR
+    (36) ARRAY_TIPO -> . ARRAY PRA INDEX RANGE INDEX PRF OF BASE_TIPO
+
+    INTEGER         shift and go to state 84
+    BOOLEAN         shift and go to state 85
+    STRING          shift and go to state 86
+    REAL            shift and go to state 87
+    CHAR            shift and go to state 88
+    ARRAY           shift and go to state 89
+
+    TIPO                           shift and go to state 81
+    BASE_TIPO                      shift and go to state 82
+    ARRAY_TIPO                     shift and go to state 83
+
+state 47
+
+    (37) VL -> VL COMMA . ID
+
+    ID              shift and go to state 90
+
+
+state 48
+
+    (66) CC -> BEGIN CL . END
+    (39) CL -> CL . SEMICOLON C
+
+    END             shift and go to state 91
+    SEMICOLON       shift and go to state 50
+
+
+state 49
+
+    (17) B -> BEGIN CL END .
+
+    DOT             reduce using rule 17 (B -> BEGIN CL END .)
+
+
+state 50
+
+    (39) CL -> CL SEMICOLON . C
+    (43) C -> . matched
+    (44) C -> . unmatched
+    (45) matched -> . IF E THEN matched ELSE matched
+    (46) matched -> . CC
+    (47) unmatched -> . IF E THEN C
+    (48) unmatched -> . IF E THEN matched ELSE unmatched
+    (59) CC -> . Write
+    (60) CC -> . Read
+    (61) CC -> . Assign
+    (62) CC -> . For
+    (63) CC -> . While
+    (64) CC -> . Call
+    (65) CC -> . Repeat
+    (66) CC -> . BEGIN CL END
+    (67) CC -> . empty
+    (50) Write -> . WRITELN PA AL PF
+    (51) Read -> . READLN PA LVALUE_LIST PF
+    (54) Assign -> . LVALUE DOTEDEQUALS E
+    (55) For -> . FOR ID DOTEDEQUALS E FORDIR E DO C
+    (58) While -> . WHILE E DO C
+    (41) Call -> . ID PA AL PF
+    (42) Call -> . ID
+    (49) Repeat -> . REPEAT C UNTIL E SEMICOLON
+    (1) empty -> .
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    IF              shift and go to state 25
+    BEGIN           shift and go to state 20
+    WRITELN         shift and go to state 35
+    READLN          shift and go to state 36
+    FOR             shift and go to state 38
+    WHILE           shift and go to state 40
+    ID              shift and go to state 39
+    REPEAT          shift and go to state 41
+    END             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+
+    C                              shift and go to state 92
+    matched                        shift and go to state 23
+    unmatched                      shift and go to state 24
+    CC                             shift and go to state 26
+    Write                          shift and go to state 27
+    Read                           shift and go to state 28
+    Assign                         shift and go to state 29
+    For                            shift and go to state 30
+    While                          shift and go to state 31
+    Call                           shift and go to state 32
+    Repeat                         shift and go to state 33
+    empty                          shift and go to state 34
+    LVALUE                         shift and go to state 37
+
+state 51
+
+    (45) matched -> IF E . THEN matched ELSE matched
+    (47) unmatched -> IF E . THEN C
+    (48) unmatched -> IF E . THEN matched ELSE unmatched
+    (72) E -> E . OR E1
+
+    THEN            shift and go to state 93
+    OR              shift and go to state 94
+
+
+state 52
+
+    (73) E -> E1 .
+    (74) E1 -> E1 . AND E2
+
+    THEN            reduce using rule 73 (E -> E1 .)
+    OR              reduce using rule 73 (E -> E1 .)
+    DO              reduce using rule 73 (E -> E1 .)
+    PF              reduce using rule 73 (E -> E1 .)
+    COMMA           reduce using rule 73 (E -> E1 .)
+    END             reduce using rule 73 (E -> E1 .)
+    SEMICOLON       reduce using rule 73 (E -> E1 .)
+    UNTIL           reduce using rule 73 (E -> E1 .)
+    ELSE            reduce using rule 73 (E -> E1 .)
+    PRF             reduce using rule 73 (E -> E1 .)
+    TO              reduce using rule 73 (E -> E1 .)
+    DOWNTO          reduce using rule 73 (E -> E1 .)
+    AND             shift and go to state 95
+
+
+state 53
+
+    (75) E1 -> E2 .
+
+    AND             reduce using rule 75 (E1 -> E2 .)
+    THEN            reduce using rule 75 (E1 -> E2 .)
+    OR              reduce using rule 75 (E1 -> E2 .)
+    DO              reduce using rule 75 (E1 -> E2 .)
+    PF              reduce using rule 75 (E1 -> E2 .)
+    COMMA           reduce using rule 75 (E1 -> E2 .)
+    END             reduce using rule 75 (E1 -> E2 .)
+    SEMICOLON       reduce using rule 75 (E1 -> E2 .)
+    UNTIL           reduce using rule 75 (E1 -> E2 .)
+    ELSE            reduce using rule 75 (E1 -> E2 .)
+    PRF             reduce using rule 75 (E1 -> E2 .)
+    TO              reduce using rule 75 (E1 -> E2 .)
+    DOWNTO          reduce using rule 75 (E1 -> E2 .)
+
+
+state 54
+
+    (76) E2 -> A . MENOR A
+    (77) E2 -> A . MAIOR A
+    (78) E2 -> A . MAIORIGUAL A
+    (79) E2 -> A . MENORIGUAL A
+    (80) E2 -> A . DIFERENTE A
+    (81) E2 -> A . EQUALS A
+    (82) E2 -> A .
+    (83) A -> A . PLUS T
+    (84) A -> A . MINUS T
+
+    MENOR           shift and go to state 96
+    MAIOR           shift and go to state 97
+    MAIORIGUAL      shift and go to state 98
+    MENORIGUAL      shift and go to state 99
+    DIFERENTE       shift and go to state 100
+    EQUALS          shift and go to state 101
+    AND             reduce using rule 82 (E2 -> A .)
+    THEN            reduce using rule 82 (E2 -> A .)
+    OR              reduce using rule 82 (E2 -> A .)
+    DO              reduce using rule 82 (E2 -> A .)
+    PF              reduce using rule 82 (E2 -> A .)
+    COMMA           reduce using rule 82 (E2 -> A .)
+    END             reduce using rule 82 (E2 -> A .)
+    SEMICOLON       reduce using rule 82 (E2 -> A .)
+    UNTIL           reduce using rule 82 (E2 -> A .)
+    ELSE            reduce using rule 82 (E2 -> A .)
+    PRF             reduce using rule 82 (E2 -> A .)
+    TO              reduce using rule 82 (E2 -> A .)
+    DOWNTO          reduce using rule 82 (E2 -> A .)
+    PLUS            shift and go to state 102
+    MINUS           shift and go to state 103
+
+
+state 55
+
+    (100) F -> PLUS . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    F                              shift and go to state 104
+    LVALUE                         shift and go to state 61
+
+state 56
+
+    (85) A -> T .
+    (86) T -> T . MULT F
+    (87) T -> T . DIV F
+    (88) T -> T . MOD F
+
+    MENOR           reduce using rule 85 (A -> T .)
+    MAIOR           reduce using rule 85 (A -> T .)
+    MAIORIGUAL      reduce using rule 85 (A -> T .)
+    MENORIGUAL      reduce using rule 85 (A -> T .)
+    DIFERENTE       reduce using rule 85 (A -> T .)
+    EQUALS          reduce using rule 85 (A -> T .)
+    PLUS            reduce using rule 85 (A -> T .)
+    MINUS           reduce using rule 85 (A -> T .)
+    AND             reduce using rule 85 (A -> T .)
+    THEN            reduce using rule 85 (A -> T .)
+    OR              reduce using rule 85 (A -> T .)
+    DO              reduce using rule 85 (A -> T .)
+    PF              reduce using rule 85 (A -> T .)
+    COMMA           reduce using rule 85 (A -> T .)
+    END             reduce using rule 85 (A -> T .)
+    SEMICOLON       reduce using rule 85 (A -> T .)
+    UNTIL           reduce using rule 85 (A -> T .)
+    ELSE            reduce using rule 85 (A -> T .)
+    PRF             reduce using rule 85 (A -> T .)
+    TO              reduce using rule 85 (A -> T .)
+    DOWNTO          reduce using rule 85 (A -> T .)
+    MULT            shift and go to state 105
+    DIV             shift and go to state 106
+    MOD             shift and go to state 107
+
+
+state 57
+
+    (99) F -> MINUS . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    F                              shift and go to state 108
+    LVALUE                         shift and go to state 61
+
+state 58
+
+    (89) T -> F .
+
+    MULT            reduce using rule 89 (T -> F .)
+    DIV             reduce using rule 89 (T -> F .)
+    MOD             reduce using rule 89 (T -> F .)
+    MENOR           reduce using rule 89 (T -> F .)
+    MAIOR           reduce using rule 89 (T -> F .)
+    MAIORIGUAL      reduce using rule 89 (T -> F .)
+    MENORIGUAL      reduce using rule 89 (T -> F .)
+    DIFERENTE       reduce using rule 89 (T -> F .)
+    EQUALS          reduce using rule 89 (T -> F .)
+    PLUS            reduce using rule 89 (T -> F .)
+    MINUS           reduce using rule 89 (T -> F .)
+    AND             reduce using rule 89 (T -> F .)
+    THEN            reduce using rule 89 (T -> F .)
+    OR              reduce using rule 89 (T -> F .)
+    DO              reduce using rule 89 (T -> F .)
+    PF              reduce using rule 89 (T -> F .)
+    COMMA           reduce using rule 89 (T -> F .)
+    END             reduce using rule 89 (T -> F .)
+    SEMICOLON       reduce using rule 89 (T -> F .)
+    UNTIL           reduce using rule 89 (T -> F .)
+    ELSE            reduce using rule 89 (T -> F .)
+    PRF             reduce using rule 89 (T -> F .)
+    TO              reduce using rule 89 (T -> F .)
+    DOWNTO          reduce using rule 89 (T -> F .)
+
+
+state 59
+
+    (90) F -> ID . PA AL PF
+    (69) LVALUE -> ID .
+
+    PA              shift and go to state 109
+    PRA             reduce using rule 69 (LVALUE -> ID .)
+    MULT            reduce using rule 69 (LVALUE -> ID .)
+    DIV             reduce using rule 69 (LVALUE -> ID .)
+    MOD             reduce using rule 69 (LVALUE -> ID .)
+    MENOR           reduce using rule 69 (LVALUE -> ID .)
+    MAIOR           reduce using rule 69 (LVALUE -> ID .)
+    MAIORIGUAL      reduce using rule 69 (LVALUE -> ID .)
+    MENORIGUAL      reduce using rule 69 (LVALUE -> ID .)
+    DIFERENTE       reduce using rule 69 (LVALUE -> ID .)
+    EQUALS          reduce using rule 69 (LVALUE -> ID .)
+    PLUS            reduce using rule 69 (LVALUE -> ID .)
+    MINUS           reduce using rule 69 (LVALUE -> ID .)
+    AND             reduce using rule 69 (LVALUE -> ID .)
+    THEN            reduce using rule 69 (LVALUE -> ID .)
+    OR              reduce using rule 69 (LVALUE -> ID .)
+    DO              reduce using rule 69 (LVALUE -> ID .)
+    PF              reduce using rule 69 (LVALUE -> ID .)
+    COMMA           reduce using rule 69 (LVALUE -> ID .)
+    END             reduce using rule 69 (LVALUE -> ID .)
+    SEMICOLON       reduce using rule 69 (LVALUE -> ID .)
+    UNTIL           reduce using rule 69 (LVALUE -> ID .)
+    ELSE            reduce using rule 69 (LVALUE -> ID .)
+    PRF             reduce using rule 69 (LVALUE -> ID .)
+    TO              reduce using rule 69 (LVALUE -> ID .)
+    DOWNTO          reduce using rule 69 (LVALUE -> ID .)
+
+
+state 60
+
+    (95) F -> PA . E PF
+    (72) E -> . E OR E1
+    (73) E -> . E1
+    (74) E1 -> . E1 AND E2
+    (75) E1 -> . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    E                              shift and go to state 110
+    E1                             shift and go to state 52
+    E2                             shift and go to state 53
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 61
+
+    (91) F -> LVALUE .
+    (68) LVALUE -> LVALUE . PRA E PRF
+
+    MULT            reduce using rule 91 (F -> LVALUE .)
+    DIV             reduce using rule 91 (F -> LVALUE .)
+    MOD             reduce using rule 91 (F -> LVALUE .)
+    MENOR           reduce using rule 91 (F -> LVALUE .)
+    MAIOR           reduce using rule 91 (F -> LVALUE .)
+    MAIORIGUAL      reduce using rule 91 (F -> LVALUE .)
+    MENORIGUAL      reduce using rule 91 (F -> LVALUE .)
+    DIFERENTE       reduce using rule 91 (F -> LVALUE .)
+    EQUALS          reduce using rule 91 (F -> LVALUE .)
+    PLUS            reduce using rule 91 (F -> LVALUE .)
+    MINUS           reduce using rule 91 (F -> LVALUE .)
+    AND             reduce using rule 91 (F -> LVALUE .)
+    THEN            reduce using rule 91 (F -> LVALUE .)
+    OR              reduce using rule 91 (F -> LVALUE .)
+    DO              reduce using rule 91 (F -> LVALUE .)
+    PF              reduce using rule 91 (F -> LVALUE .)
+    COMMA           reduce using rule 91 (F -> LVALUE .)
+    END             reduce using rule 91 (F -> LVALUE .)
+    SEMICOLON       reduce using rule 91 (F -> LVALUE .)
+    UNTIL           reduce using rule 91 (F -> LVALUE .)
+    ELSE            reduce using rule 91 (F -> LVALUE .)
+    PRF             reduce using rule 91 (F -> LVALUE .)
+    TO              reduce using rule 91 (F -> LVALUE .)
+    DOWNTO          reduce using rule 91 (F -> LVALUE .)
+    PRA             shift and go to state 71
+
+
+state 62
+
+    (92) F -> NUMS .
+
+    MULT            reduce using rule 92 (F -> NUMS .)
+    DIV             reduce using rule 92 (F -> NUMS .)
+    MOD             reduce using rule 92 (F -> NUMS .)
+    MENOR           reduce using rule 92 (F -> NUMS .)
+    MAIOR           reduce using rule 92 (F -> NUMS .)
+    MAIORIGUAL      reduce using rule 92 (F -> NUMS .)
+    MENORIGUAL      reduce using rule 92 (F -> NUMS .)
+    DIFERENTE       reduce using rule 92 (F -> NUMS .)
+    EQUALS          reduce using rule 92 (F -> NUMS .)
+    PLUS            reduce using rule 92 (F -> NUMS .)
+    MINUS           reduce using rule 92 (F -> NUMS .)
+    AND             reduce using rule 92 (F -> NUMS .)
+    THEN            reduce using rule 92 (F -> NUMS .)
+    OR              reduce using rule 92 (F -> NUMS .)
+    DO              reduce using rule 92 (F -> NUMS .)
+    PF              reduce using rule 92 (F -> NUMS .)
+    COMMA           reduce using rule 92 (F -> NUMS .)
+    END             reduce using rule 92 (F -> NUMS .)
+    SEMICOLON       reduce using rule 92 (F -> NUMS .)
+    UNTIL           reduce using rule 92 (F -> NUMS .)
+    ELSE            reduce using rule 92 (F -> NUMS .)
+    PRF             reduce using rule 92 (F -> NUMS .)
+    TO              reduce using rule 92 (F -> NUMS .)
+    DOWNTO          reduce using rule 92 (F -> NUMS .)
+
+
+state 63
+
+    (93) F -> NUM_REAL .
+
+    MULT            reduce using rule 93 (F -> NUM_REAL .)
+    DIV             reduce using rule 93 (F -> NUM_REAL .)
+    MOD             reduce using rule 93 (F -> NUM_REAL .)
+    MENOR           reduce using rule 93 (F -> NUM_REAL .)
+    MAIOR           reduce using rule 93 (F -> NUM_REAL .)
+    MAIORIGUAL      reduce using rule 93 (F -> NUM_REAL .)
+    MENORIGUAL      reduce using rule 93 (F -> NUM_REAL .)
+    DIFERENTE       reduce using rule 93 (F -> NUM_REAL .)
+    EQUALS          reduce using rule 93 (F -> NUM_REAL .)
+    PLUS            reduce using rule 93 (F -> NUM_REAL .)
+    MINUS           reduce using rule 93 (F -> NUM_REAL .)
+    AND             reduce using rule 93 (F -> NUM_REAL .)
+    THEN            reduce using rule 93 (F -> NUM_REAL .)
+    OR              reduce using rule 93 (F -> NUM_REAL .)
+    DO              reduce using rule 93 (F -> NUM_REAL .)
+    PF              reduce using rule 93 (F -> NUM_REAL .)
+    COMMA           reduce using rule 93 (F -> NUM_REAL .)
+    END             reduce using rule 93 (F -> NUM_REAL .)
+    SEMICOLON       reduce using rule 93 (F -> NUM_REAL .)
+    UNTIL           reduce using rule 93 (F -> NUM_REAL .)
+    ELSE            reduce using rule 93 (F -> NUM_REAL .)
+    PRF             reduce using rule 93 (F -> NUM_REAL .)
+    TO              reduce using rule 93 (F -> NUM_REAL .)
+    DOWNTO          reduce using rule 93 (F -> NUM_REAL .)
+
+
+state 64
+
+    (94) F -> STRINGS .
+
+    MULT            reduce using rule 94 (F -> STRINGS .)
+    DIV             reduce using rule 94 (F -> STRINGS .)
+    MOD             reduce using rule 94 (F -> STRINGS .)
+    MENOR           reduce using rule 94 (F -> STRINGS .)
+    MAIOR           reduce using rule 94 (F -> STRINGS .)
+    MAIORIGUAL      reduce using rule 94 (F -> STRINGS .)
+    MENORIGUAL      reduce using rule 94 (F -> STRINGS .)
+    DIFERENTE       reduce using rule 94 (F -> STRINGS .)
+    EQUALS          reduce using rule 94 (F -> STRINGS .)
+    PLUS            reduce using rule 94 (F -> STRINGS .)
+    MINUS           reduce using rule 94 (F -> STRINGS .)
+    AND             reduce using rule 94 (F -> STRINGS .)
+    THEN            reduce using rule 94 (F -> STRINGS .)
+    OR              reduce using rule 94 (F -> STRINGS .)
+    DO              reduce using rule 94 (F -> STRINGS .)
+    PF              reduce using rule 94 (F -> STRINGS .)
+    COMMA           reduce using rule 94 (F -> STRINGS .)
+    END             reduce using rule 94 (F -> STRINGS .)
+    SEMICOLON       reduce using rule 94 (F -> STRINGS .)
+    UNTIL           reduce using rule 94 (F -> STRINGS .)
+    ELSE            reduce using rule 94 (F -> STRINGS .)
+    PRF             reduce using rule 94 (F -> STRINGS .)
+    TO              reduce using rule 94 (F -> STRINGS .)
+    DOWNTO          reduce using rule 94 (F -> STRINGS .)
+
+
+state 65
+
+    (96) F -> TRUE .
+
+    MULT            reduce using rule 96 (F -> TRUE .)
+    DIV             reduce using rule 96 (F -> TRUE .)
+    MOD             reduce using rule 96 (F -> TRUE .)
+    MENOR           reduce using rule 96 (F -> TRUE .)
+    MAIOR           reduce using rule 96 (F -> TRUE .)
+    MAIORIGUAL      reduce using rule 96 (F -> TRUE .)
+    MENORIGUAL      reduce using rule 96 (F -> TRUE .)
+    DIFERENTE       reduce using rule 96 (F -> TRUE .)
+    EQUALS          reduce using rule 96 (F -> TRUE .)
+    PLUS            reduce using rule 96 (F -> TRUE .)
+    MINUS           reduce using rule 96 (F -> TRUE .)
+    AND             reduce using rule 96 (F -> TRUE .)
+    THEN            reduce using rule 96 (F -> TRUE .)
+    OR              reduce using rule 96 (F -> TRUE .)
+    DO              reduce using rule 96 (F -> TRUE .)
+    PF              reduce using rule 96 (F -> TRUE .)
+    COMMA           reduce using rule 96 (F -> TRUE .)
+    END             reduce using rule 96 (F -> TRUE .)
+    SEMICOLON       reduce using rule 96 (F -> TRUE .)
+    UNTIL           reduce using rule 96 (F -> TRUE .)
+    ELSE            reduce using rule 96 (F -> TRUE .)
+    PRF             reduce using rule 96 (F -> TRUE .)
+    TO              reduce using rule 96 (F -> TRUE .)
+    DOWNTO          reduce using rule 96 (F -> TRUE .)
+
+
+state 66
+
+    (97) F -> FALSE .
+
+    MULT            reduce using rule 97 (F -> FALSE .)
+    DIV             reduce using rule 97 (F -> FALSE .)
+    MOD             reduce using rule 97 (F -> FALSE .)
+    MENOR           reduce using rule 97 (F -> FALSE .)
+    MAIOR           reduce using rule 97 (F -> FALSE .)
+    MAIORIGUAL      reduce using rule 97 (F -> FALSE .)
+    MENORIGUAL      reduce using rule 97 (F -> FALSE .)
+    DIFERENTE       reduce using rule 97 (F -> FALSE .)
+    EQUALS          reduce using rule 97 (F -> FALSE .)
+    PLUS            reduce using rule 97 (F -> FALSE .)
+    MINUS           reduce using rule 97 (F -> FALSE .)
+    AND             reduce using rule 97 (F -> FALSE .)
+    THEN            reduce using rule 97 (F -> FALSE .)
+    OR              reduce using rule 97 (F -> FALSE .)
+    DO              reduce using rule 97 (F -> FALSE .)
+    PF              reduce using rule 97 (F -> FALSE .)
+    COMMA           reduce using rule 97 (F -> FALSE .)
+    END             reduce using rule 97 (F -> FALSE .)
+    SEMICOLON       reduce using rule 97 (F -> FALSE .)
+    UNTIL           reduce using rule 97 (F -> FALSE .)
+    ELSE            reduce using rule 97 (F -> FALSE .)
+    PRF             reduce using rule 97 (F -> FALSE .)
+    TO              reduce using rule 97 (F -> FALSE .)
+    DOWNTO          reduce using rule 97 (F -> FALSE .)
+
+
+state 67
+
+    (98) F -> NOT . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    F                              shift and go to state 111
+    LVALUE                         shift and go to state 61
+
+state 68
+
+    (50) Write -> WRITELN PA . AL PF
+    (70) AL -> . AL COMMA E
+    (71) AL -> . E
+    (72) E -> . E OR E1
+    (73) E -> . E1
+    (74) E1 -> . E1 AND E2
+    (75) E1 -> . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    AL                             shift and go to state 112
+    E                              shift and go to state 113
+    E1                             shift and go to state 52
+    E2                             shift and go to state 53
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 69
+
+    (51) Read -> READLN PA . LVALUE_LIST PF
+    (52) LVALUE_LIST -> . LVALUE_LIST COMMA LVALUE
+    (53) LVALUE_LIST -> . LVALUE
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 116
+
+    LVALUE_LIST                    shift and go to state 114
+    LVALUE                         shift and go to state 115
+
+state 70
+
+    (54) Assign -> LVALUE DOTEDEQUALS . E
+    (72) E -> . E OR E1
+    (73) E -> . E1
+    (74) E1 -> . E1 AND E2
+    (75) E1 -> . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    LVALUE                         shift and go to state 61
+    E                              shift and go to state 117
+    E1                             shift and go to state 52
+    E2                             shift and go to state 53
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+
+state 71
+
+    (68) LVALUE -> LVALUE PRA . E PRF
+    (72) E -> . E OR E1
+    (73) E -> . E1
+    (74) E1 -> . E1 AND E2
+    (75) E1 -> . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    LVALUE                         shift and go to state 61
+    E                              shift and go to state 118
+    E1                             shift and go to state 52
+    E2                             shift and go to state 53
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+
+state 72
+
+    (55) For -> FOR ID . DOTEDEQUALS E FORDIR E DO C
+
+    DOTEDEQUALS     shift and go to state 119
+
+
+state 73
+
+    (41) Call -> ID PA . AL PF
+    (70) AL -> . AL COMMA E
+    (71) AL -> . E
+    (72) E -> . E OR E1
+    (73) E -> . E1
+    (74) E1 -> . E1 AND E2
+    (75) E1 -> . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    AL                             shift and go to state 120
+    E                              shift and go to state 113
+    E1                             shift and go to state 52
+    E2                             shift and go to state 53
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 74
+
+    (58) While -> WHILE E . DO C
+    (72) E -> E . OR E1
+
+    DO              shift and go to state 121
+    OR              shift and go to state 94
+
+
+state 75
+
+    (49) Repeat -> REPEAT C . UNTIL E SEMICOLON
+
+    UNTIL           shift and go to state 122
+
+
+state 76
+
+    (6) FUNCTION_DECL -> FUNCTION ID PA . FPARAMS PF DOUBLEDOT TIPO SEMICOLON FBLOCK
+    (9) FPARAMS -> . PARAM_LIST
+    (10) FPARAMS -> . empty
+    (11) PARAM_LIST -> . PARAM_LIST COMMA PARAM
+    (12) PARAM_LIST -> . PARAM
+    (1) empty -> .
+    (13) PARAM -> . ID DOUBLEDOT TIPO
+
+    PF              reduce using rule 1 (empty -> .)
+    ID              shift and go to state 123
+
+    FPARAMS                        shift and go to state 124
+    PARAM_LIST                     shift and go to state 125
+    empty                          shift and go to state 126
+    PARAM                          shift and go to state 127
+
+state 77
+
+    (7) PROCEDURE_DECL -> PROCEDURE ID PA . FPARAMS PF SEMICOLON FBLOCK
+    (9) FPARAMS -> . PARAM_LIST
+    (10) FPARAMS -> . empty
+    (11) PARAM_LIST -> . PARAM_LIST COMMA PARAM
+    (12) PARAM_LIST -> . PARAM
+    (1) empty -> .
+    (13) PARAM -> . ID DOUBLEDOT TIPO
+
+    PF              reduce using rule 1 (empty -> .)
+    ID              shift and go to state 123
+
+    FPARAMS                        shift and go to state 128
+    PARAM_LIST                     shift and go to state 125
+    empty                          shift and go to state 126
+    PARAM                          shift and go to state 127
+
+state 78
+
+    (8) PROCEDURE_DECL -> PROCEDURE ID SEMICOLON . FBLOCK
+    (14) FBLOCK -> . VAR DL BEGIN CL END SEMICOLON
+    (15) FBLOCK -> . BEGIN CL END SEMICOLON
+
+    VAR             shift and go to state 130
+    BEGIN           shift and go to state 131
+
+    FBLOCK                         shift and go to state 129
+
+state 79
+
+    (16) B -> VAR DL BEGIN CL . END
+    (39) CL -> CL . SEMICOLON C
+
+    END             shift and go to state 132
+    SEMICOLON       shift and go to state 50
+
+
+state 80
+
+    (18) DL -> DL SEMICOLON D .
+
+    BEGIN           reduce using rule 18 (DL -> DL SEMICOLON D .)
+    SEMICOLON       reduce using rule 18 (DL -> DL SEMICOLON D .)
+
+
+state 81
+
+    (20) D -> VL DOUBLEDOT TIPO .
+
+    BEGIN           reduce using rule 20 (D -> VL DOUBLEDOT TIPO .)
+    SEMICOLON       reduce using rule 20 (D -> VL DOUBLEDOT TIPO .)
+
+
+state 82
+
+    (22) TIPO -> BASE_TIPO .
+
+    BEGIN           reduce using rule 22 (TIPO -> BASE_TIPO .)
+    SEMICOLON       reduce using rule 22 (TIPO -> BASE_TIPO .)
+    COMMA           reduce using rule 22 (TIPO -> BASE_TIPO .)
+    PF              reduce using rule 22 (TIPO -> BASE_TIPO .)
+
+
+state 83
+
+    (23) TIPO -> ARRAY_TIPO .
+
+    BEGIN           reduce using rule 23 (TIPO -> ARRAY_TIPO .)
+    SEMICOLON       reduce using rule 23 (TIPO -> ARRAY_TIPO .)
+    COMMA           reduce using rule 23 (TIPO -> ARRAY_TIPO .)
+    PF              reduce using rule 23 (TIPO -> ARRAY_TIPO .)
+
+
+state 84
+
+    (24) BASE_TIPO -> INTEGER .
+
+    BEGIN           reduce using rule 24 (BASE_TIPO -> INTEGER .)
+    SEMICOLON       reduce using rule 24 (BASE_TIPO -> INTEGER .)
+    COMMA           reduce using rule 24 (BASE_TIPO -> INTEGER .)
+    PF              reduce using rule 24 (BASE_TIPO -> INTEGER .)
+
+
+state 85
+
+    (25) BASE_TIPO -> BOOLEAN .
+
+    BEGIN           reduce using rule 25 (BASE_TIPO -> BOOLEAN .)
+    SEMICOLON       reduce using rule 25 (BASE_TIPO -> BOOLEAN .)
+    COMMA           reduce using rule 25 (BASE_TIPO -> BOOLEAN .)
+    PF              reduce using rule 25 (BASE_TIPO -> BOOLEAN .)
+
+
+state 86
+
+    (26) BASE_TIPO -> STRING .
+
+    BEGIN           reduce using rule 26 (BASE_TIPO -> STRING .)
+    SEMICOLON       reduce using rule 26 (BASE_TIPO -> STRING .)
+    COMMA           reduce using rule 26 (BASE_TIPO -> STRING .)
+    PF              reduce using rule 26 (BASE_TIPO -> STRING .)
+
+
+state 87
+
+    (27) BASE_TIPO -> REAL .
+
+    BEGIN           reduce using rule 27 (BASE_TIPO -> REAL .)
+    SEMICOLON       reduce using rule 27 (BASE_TIPO -> REAL .)
+    COMMA           reduce using rule 27 (BASE_TIPO -> REAL .)
+    PF              reduce using rule 27 (BASE_TIPO -> REAL .)
+
+
+state 88
+
+    (28) BASE_TIPO -> CHAR .
+
+    BEGIN           reduce using rule 28 (BASE_TIPO -> CHAR .)
+    SEMICOLON       reduce using rule 28 (BASE_TIPO -> CHAR .)
+    COMMA           reduce using rule 28 (BASE_TIPO -> CHAR .)
+    PF              reduce using rule 28 (BASE_TIPO -> CHAR .)
+
+
+state 89
+
+    (36) ARRAY_TIPO -> ARRAY . PRA INDEX RANGE INDEX PRF OF BASE_TIPO
+
+    PRA             shift and go to state 133
+
+
+state 90
+
+    (37) VL -> VL COMMA ID .
+
+    DOUBLEDOT       reduce using rule 37 (VL -> VL COMMA ID .)
+    COMMA           reduce using rule 37 (VL -> VL COMMA ID .)
+
+
+state 91
+
+    (66) CC -> BEGIN CL END .
+
+    END             reduce using rule 66 (CC -> BEGIN CL END .)
+    SEMICOLON       reduce using rule 66 (CC -> BEGIN CL END .)
+    UNTIL           reduce using rule 66 (CC -> BEGIN CL END .)
+    ELSE            reduce using rule 66 (CC -> BEGIN CL END .)
+
+
+state 92
+
+    (39) CL -> CL SEMICOLON C .
+
+    END             reduce using rule 39 (CL -> CL SEMICOLON C .)
+    SEMICOLON       reduce using rule 39 (CL -> CL SEMICOLON C .)
+
+
+state 93
+
+    (45) matched -> IF E THEN . matched ELSE matched
+    (47) unmatched -> IF E THEN . C
+    (48) unmatched -> IF E THEN . matched ELSE unmatched
+    (45) matched -> . IF E THEN matched ELSE matched
+    (46) matched -> . CC
+    (43) C -> . matched
+    (44) C -> . unmatched
+    (59) CC -> . Write
+    (60) CC -> . Read
+    (61) CC -> . Assign
+    (62) CC -> . For
+    (63) CC -> . While
+    (64) CC -> . Call
+    (65) CC -> . Repeat
+    (66) CC -> . BEGIN CL END
+    (67) CC -> . empty
+    (47) unmatched -> . IF E THEN C
+    (48) unmatched -> . IF E THEN matched ELSE unmatched
+    (50) Write -> . WRITELN PA AL PF
+    (51) Read -> . READLN PA LVALUE_LIST PF
+    (54) Assign -> . LVALUE DOTEDEQUALS E
+    (55) For -> . FOR ID DOTEDEQUALS E FORDIR E DO C
+    (58) While -> . WHILE E DO C
+    (41) Call -> . ID PA AL PF
+    (42) Call -> . ID
+    (49) Repeat -> . REPEAT C UNTIL E SEMICOLON
+    (1) empty -> .
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    IF              shift and go to state 25
+    BEGIN           shift and go to state 20
+    WRITELN         shift and go to state 35
+    READLN          shift and go to state 36
+    FOR             shift and go to state 38
+    WHILE           shift and go to state 40
+    ID              shift and go to state 39
+    REPEAT          shift and go to state 41
+    ELSE            reduce using rule 1 (empty -> .)
+    END             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    UNTIL           reduce using rule 1 (empty -> .)
+
+    matched                        shift and go to state 134
+    C                              shift and go to state 135
+    unmatched                      shift and go to state 24
+    CC                             shift and go to state 26
+    Write                          shift and go to state 27
+    Read                           shift and go to state 28
+    Assign                         shift and go to state 29
+    For                            shift and go to state 30
+    While                          shift and go to state 31
+    Call                           shift and go to state 32
+    Repeat                         shift and go to state 33
+    empty                          shift and go to state 34
+    LVALUE                         shift and go to state 37
+
+state 94
+
+    (72) E -> E OR . E1
+    (74) E1 -> . E1 AND E2
+    (75) E1 -> . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    E1                             shift and go to state 136
+    E2                             shift and go to state 53
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 95
+
+    (74) E1 -> E1 AND . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    E2                             shift and go to state 137
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 96
+
+    (76) E2 -> A MENOR . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    A                              shift and go to state 138
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 97
+
+    (77) E2 -> A MAIOR . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    A                              shift and go to state 139
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 98
+
+    (78) E2 -> A MAIORIGUAL . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    A                              shift and go to state 140
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 99
+
+    (79) E2 -> A MENORIGUAL . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    A                              shift and go to state 141
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 100
+
+    (80) E2 -> A DIFERENTE . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    A                              shift and go to state 142
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 101
+
+    (81) E2 -> A EQUALS . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    A                              shift and go to state 143
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 102
+
+    (83) A -> A PLUS . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    T                              shift and go to state 144
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 103
+
+    (84) A -> A MINUS . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    T                              shift and go to state 145
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 104
+
+    (100) F -> PLUS F .
+
+    MULT            reduce using rule 100 (F -> PLUS F .)
+    DIV             reduce using rule 100 (F -> PLUS F .)
+    MOD             reduce using rule 100 (F -> PLUS F .)
+    MENOR           reduce using rule 100 (F -> PLUS F .)
+    MAIOR           reduce using rule 100 (F -> PLUS F .)
+    MAIORIGUAL      reduce using rule 100 (F -> PLUS F .)
+    MENORIGUAL      reduce using rule 100 (F -> PLUS F .)
+    DIFERENTE       reduce using rule 100 (F -> PLUS F .)
+    EQUALS          reduce using rule 100 (F -> PLUS F .)
+    PLUS            reduce using rule 100 (F -> PLUS F .)
+    MINUS           reduce using rule 100 (F -> PLUS F .)
+    AND             reduce using rule 100 (F -> PLUS F .)
+    THEN            reduce using rule 100 (F -> PLUS F .)
+    OR              reduce using rule 100 (F -> PLUS F .)
+    DO              reduce using rule 100 (F -> PLUS F .)
+    PF              reduce using rule 100 (F -> PLUS F .)
+    COMMA           reduce using rule 100 (F -> PLUS F .)
+    END             reduce using rule 100 (F -> PLUS F .)
+    SEMICOLON       reduce using rule 100 (F -> PLUS F .)
+    UNTIL           reduce using rule 100 (F -> PLUS F .)
+    ELSE            reduce using rule 100 (F -> PLUS F .)
+    PRF             reduce using rule 100 (F -> PLUS F .)
+    TO              reduce using rule 100 (F -> PLUS F .)
+    DOWNTO          reduce using rule 100 (F -> PLUS F .)
+
+
+state 105
+
+    (86) T -> T MULT . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    F                              shift and go to state 146
+    LVALUE                         shift and go to state 61
+
+state 106
+
+    (87) T -> T DIV . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    F                              shift and go to state 147
+    LVALUE                         shift and go to state 61
+
+state 107
+
+    (88) T -> T MOD . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    F                              shift and go to state 148
+    LVALUE                         shift and go to state 61
+
+state 108
+
+    (99) F -> MINUS F .
+
+    MULT            reduce using rule 99 (F -> MINUS F .)
+    DIV             reduce using rule 99 (F -> MINUS F .)
+    MOD             reduce using rule 99 (F -> MINUS F .)
+    MENOR           reduce using rule 99 (F -> MINUS F .)
+    MAIOR           reduce using rule 99 (F -> MINUS F .)
+    MAIORIGUAL      reduce using rule 99 (F -> MINUS F .)
+    MENORIGUAL      reduce using rule 99 (F -> MINUS F .)
+    DIFERENTE       reduce using rule 99 (F -> MINUS F .)
+    EQUALS          reduce using rule 99 (F -> MINUS F .)
+    PLUS            reduce using rule 99 (F -> MINUS F .)
+    MINUS           reduce using rule 99 (F -> MINUS F .)
+    AND             reduce using rule 99 (F -> MINUS F .)
+    THEN            reduce using rule 99 (F -> MINUS F .)
+    OR              reduce using rule 99 (F -> MINUS F .)
+    DO              reduce using rule 99 (F -> MINUS F .)
+    PF              reduce using rule 99 (F -> MINUS F .)
+    COMMA           reduce using rule 99 (F -> MINUS F .)
+    END             reduce using rule 99 (F -> MINUS F .)
+    SEMICOLON       reduce using rule 99 (F -> MINUS F .)
+    UNTIL           reduce using rule 99 (F -> MINUS F .)
+    ELSE            reduce using rule 99 (F -> MINUS F .)
+    PRF             reduce using rule 99 (F -> MINUS F .)
+    TO              reduce using rule 99 (F -> MINUS F .)
+    DOWNTO          reduce using rule 99 (F -> MINUS F .)
+
+
+state 109
+
+    (90) F -> ID PA . AL PF
+    (70) AL -> . AL COMMA E
+    (71) AL -> . E
+    (72) E -> . E OR E1
+    (73) E -> . E1
+    (74) E1 -> . E1 AND E2
+    (75) E1 -> . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    AL                             shift and go to state 149
+    E                              shift and go to state 113
+    E1                             shift and go to state 52
+    E2                             shift and go to state 53
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 110
+
+    (95) F -> PA E . PF
+    (72) E -> E . OR E1
+
+    PF              shift and go to state 150
+    OR              shift and go to state 94
+
+
+state 111
+
+    (98) F -> NOT F .
+
+    MULT            reduce using rule 98 (F -> NOT F .)
+    DIV             reduce using rule 98 (F -> NOT F .)
+    MOD             reduce using rule 98 (F -> NOT F .)
+    MENOR           reduce using rule 98 (F -> NOT F .)
+    MAIOR           reduce using rule 98 (F -> NOT F .)
+    MAIORIGUAL      reduce using rule 98 (F -> NOT F .)
+    MENORIGUAL      reduce using rule 98 (F -> NOT F .)
+    DIFERENTE       reduce using rule 98 (F -> NOT F .)
+    EQUALS          reduce using rule 98 (F -> NOT F .)
+    PLUS            reduce using rule 98 (F -> NOT F .)
+    MINUS           reduce using rule 98 (F -> NOT F .)
+    AND             reduce using rule 98 (F -> NOT F .)
+    THEN            reduce using rule 98 (F -> NOT F .)
+    OR              reduce using rule 98 (F -> NOT F .)
+    DO              reduce using rule 98 (F -> NOT F .)
+    PF              reduce using rule 98 (F -> NOT F .)
+    COMMA           reduce using rule 98 (F -> NOT F .)
+    END             reduce using rule 98 (F -> NOT F .)
+    SEMICOLON       reduce using rule 98 (F -> NOT F .)
+    UNTIL           reduce using rule 98 (F -> NOT F .)
+    ELSE            reduce using rule 98 (F -> NOT F .)
+    PRF             reduce using rule 98 (F -> NOT F .)
+    TO              reduce using rule 98 (F -> NOT F .)
+    DOWNTO          reduce using rule 98 (F -> NOT F .)
+
+
+state 112
+
+    (50) Write -> WRITELN PA AL . PF
+    (70) AL -> AL . COMMA E
+
+    PF              shift and go to state 151
+    COMMA           shift and go to state 152
+
+
+state 113
+
+    (71) AL -> E .
+    (72) E -> E . OR E1
+
+    PF              reduce using rule 71 (AL -> E .)
+    COMMA           reduce using rule 71 (AL -> E .)
+    OR              shift and go to state 94
+
+
+state 114
+
+    (51) Read -> READLN PA LVALUE_LIST . PF
+    (52) LVALUE_LIST -> LVALUE_LIST . COMMA LVALUE
+
+    PF              shift and go to state 153
+    COMMA           shift and go to state 154
+
+
+state 115
+
+    (53) LVALUE_LIST -> LVALUE .
+    (68) LVALUE -> LVALUE . PRA E PRF
+
+    PF              reduce using rule 53 (LVALUE_LIST -> LVALUE .)
+    COMMA           reduce using rule 53 (LVALUE_LIST -> LVALUE .)
+    PRA             shift and go to state 71
+
+
+state 116
+
+    (69) LVALUE -> ID .
+
+    PRA             reduce using rule 69 (LVALUE -> ID .)
+    PF              reduce using rule 69 (LVALUE -> ID .)
+    COMMA           reduce using rule 69 (LVALUE -> ID .)
+
+
+state 117
+
+    (54) Assign -> LVALUE DOTEDEQUALS E .
+    (72) E -> E . OR E1
+
+    END             reduce using rule 54 (Assign -> LVALUE DOTEDEQUALS E .)
+    SEMICOLON       reduce using rule 54 (Assign -> LVALUE DOTEDEQUALS E .)
+    UNTIL           reduce using rule 54 (Assign -> LVALUE DOTEDEQUALS E .)
+    ELSE            reduce using rule 54 (Assign -> LVALUE DOTEDEQUALS E .)
+    OR              shift and go to state 94
+
+
+state 118
+
+    (68) LVALUE -> LVALUE PRA E . PRF
+    (72) E -> E . OR E1
+
+    PRF             shift and go to state 155
+    OR              shift and go to state 94
+
+
+state 119
+
+    (55) For -> FOR ID DOTEDEQUALS . E FORDIR E DO C
+    (72) E -> . E OR E1
+    (73) E -> . E1
+    (74) E1 -> . E1 AND E2
+    (75) E1 -> . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    E                              shift and go to state 156
+    E1                             shift and go to state 52
+    E2                             shift and go to state 53
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 120
+
+    (41) Call -> ID PA AL . PF
+    (70) AL -> AL . COMMA E
+
+    PF              shift and go to state 157
+    COMMA           shift and go to state 152
+
+
+state 121
+
+    (58) While -> WHILE E DO . C
+    (43) C -> . matched
+    (44) C -> . unmatched
+    (45) matched -> . IF E THEN matched ELSE matched
+    (46) matched -> . CC
+    (47) unmatched -> . IF E THEN C
+    (48) unmatched -> . IF E THEN matched ELSE unmatched
+    (59) CC -> . Write
+    (60) CC -> . Read
+    (61) CC -> . Assign
+    (62) CC -> . For
+    (63) CC -> . While
+    (64) CC -> . Call
+    (65) CC -> . Repeat
+    (66) CC -> . BEGIN CL END
+    (67) CC -> . empty
+    (50) Write -> . WRITELN PA AL PF
+    (51) Read -> . READLN PA LVALUE_LIST PF
+    (54) Assign -> . LVALUE DOTEDEQUALS E
+    (55) For -> . FOR ID DOTEDEQUALS E FORDIR E DO C
+    (58) While -> . WHILE E DO C
+    (41) Call -> . ID PA AL PF
+    (42) Call -> . ID
+    (49) Repeat -> . REPEAT C UNTIL E SEMICOLON
+    (1) empty -> .
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    IF              shift and go to state 25
+    BEGIN           shift and go to state 20
+    WRITELN         shift and go to state 35
+    READLN          shift and go to state 36
+    FOR             shift and go to state 38
+    WHILE           shift and go to state 40
+    ID              shift and go to state 39
+    REPEAT          shift and go to state 41
+    ELSE            reduce using rule 1 (empty -> .)
+    END             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    UNTIL           reduce using rule 1 (empty -> .)
+
+    C                              shift and go to state 158
+    matched                        shift and go to state 23
+    unmatched                      shift and go to state 24
+    CC                             shift and go to state 26
+    Write                          shift and go to state 27
+    Read                           shift and go to state 28
+    Assign                         shift and go to state 29
+    For                            shift and go to state 30
+    While                          shift and go to state 31
+    Call                           shift and go to state 32
+    Repeat                         shift and go to state 33
+    empty                          shift and go to state 34
+    LVALUE                         shift and go to state 37
+
+state 122
+
+    (49) Repeat -> REPEAT C UNTIL . E SEMICOLON
+    (72) E -> . E OR E1
+    (73) E -> . E1
+    (74) E1 -> . E1 AND E2
+    (75) E1 -> . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    E                              shift and go to state 159
+    E1                             shift and go to state 52
+    E2                             shift and go to state 53
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 123
+
+    (13) PARAM -> ID . DOUBLEDOT TIPO
+
+    DOUBLEDOT       shift and go to state 160
+
+
+state 124
+
+    (6) FUNCTION_DECL -> FUNCTION ID PA FPARAMS . PF DOUBLEDOT TIPO SEMICOLON FBLOCK
+
+    PF              shift and go to state 161
+
+
+state 125
+
+    (9) FPARAMS -> PARAM_LIST .
+    (11) PARAM_LIST -> PARAM_LIST . COMMA PARAM
+
+    PF              reduce using rule 9 (FPARAMS -> PARAM_LIST .)
+    COMMA           shift and go to state 162
+
+
+state 126
+
+    (10) FPARAMS -> empty .
+
+    PF              reduce using rule 10 (FPARAMS -> empty .)
+
+
+state 127
+
+    (12) PARAM_LIST -> PARAM .
+
+    COMMA           reduce using rule 12 (PARAM_LIST -> PARAM .)
+    PF              reduce using rule 12 (PARAM_LIST -> PARAM .)
+
+
+state 128
+
+    (7) PROCEDURE_DECL -> PROCEDURE ID PA FPARAMS . PF SEMICOLON FBLOCK
+
+    PF              shift and go to state 163
+
+
+state 129
+
+    (8) PROCEDURE_DECL -> PROCEDURE ID SEMICOLON FBLOCK .
+
+    VAR             reduce using rule 8 (PROCEDURE_DECL -> PROCEDURE ID SEMICOLON FBLOCK .)
+    BEGIN           reduce using rule 8 (PROCEDURE_DECL -> PROCEDURE ID SEMICOLON FBLOCK .)
+    FUNCTION        reduce using rule 8 (PROCEDURE_DECL -> PROCEDURE ID SEMICOLON FBLOCK .)
+    PROCEDURE       reduce using rule 8 (PROCEDURE_DECL -> PROCEDURE ID SEMICOLON FBLOCK .)
+
+
+state 130
+
+    (14) FBLOCK -> VAR . DL BEGIN CL END SEMICOLON
+    (18) DL -> . DL SEMICOLON D
+    (19) DL -> . D
+    (20) D -> . VL DOUBLEDOT TIPO
+    (21) D -> . empty
+    (37) VL -> . VL COMMA ID
+    (38) VL -> . ID
+    (1) empty -> .
+
+    ID              shift and go to state 19
+    BEGIN           reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+
+    DL                             shift and go to state 164
+    D                              shift and go to state 16
+    VL                             shift and go to state 17
+    empty                          shift and go to state 18
+
+state 131
+
+    (15) FBLOCK -> BEGIN . CL END SEMICOLON
+    (39) CL -> . CL SEMICOLON C
+    (40) CL -> . C
+    (43) C -> . matched
+    (44) C -> . unmatched
+    (45) matched -> . IF E THEN matched ELSE matched
+    (46) matched -> . CC
+    (47) unmatched -> . IF E THEN C
+    (48) unmatched -> . IF E THEN matched ELSE unmatched
+    (59) CC -> . Write
+    (60) CC -> . Read
+    (61) CC -> . Assign
+    (62) CC -> . For
+    (63) CC -> . While
+    (64) CC -> . Call
+    (65) CC -> . Repeat
+    (66) CC -> . BEGIN CL END
+    (67) CC -> . empty
+    (50) Write -> . WRITELN PA AL PF
+    (51) Read -> . READLN PA LVALUE_LIST PF
+    (54) Assign -> . LVALUE DOTEDEQUALS E
+    (55) For -> . FOR ID DOTEDEQUALS E FORDIR E DO C
+    (58) While -> . WHILE E DO C
+    (41) Call -> . ID PA AL PF
+    (42) Call -> . ID
+    (49) Repeat -> . REPEAT C UNTIL E SEMICOLON
+    (1) empty -> .
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    IF              shift and go to state 25
+    BEGIN           shift and go to state 20
+    WRITELN         shift and go to state 35
+    READLN          shift and go to state 36
+    FOR             shift and go to state 38
+    WHILE           shift and go to state 40
+    ID              shift and go to state 39
+    REPEAT          shift and go to state 41
+    END             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+
+    CL                             shift and go to state 165
+    C                              shift and go to state 22
+    matched                        shift and go to state 23
+    unmatched                      shift and go to state 24
+    CC                             shift and go to state 26
+    Write                          shift and go to state 27
+    Read                           shift and go to state 28
+    Assign                         shift and go to state 29
+    For                            shift and go to state 30
+    While                          shift and go to state 31
+    Call                           shift and go to state 32
+    Repeat                         shift and go to state 33
+    empty                          shift and go to state 34
+    LVALUE                         shift and go to state 37
+
+state 132
+
+    (16) B -> VAR DL BEGIN CL END .
+
+    DOT             reduce using rule 16 (B -> VAR DL BEGIN CL END .)
+
+
+state 133
+
+    (36) ARRAY_TIPO -> ARRAY PRA . INDEX RANGE INDEX PRF OF BASE_TIPO
+    (29) INDEX -> . NUMS
+    (30) INDEX -> . MINUS NUMS
+    (31) INDEX -> . INDEX MINUS NUMS
+    (32) INDEX -> . INDEX PLUS NUMS
+    (33) INDEX -> . INDEX MULT NUMS
+    (34) INDEX -> . INDEX DIV NUMS
+    (35) INDEX -> . INDEX MOD NUMS
+
+    NUMS            shift and go to state 167
+    MINUS           shift and go to state 168
+
+    INDEX                          shift and go to state 166
+
+state 134
+
+    (45) matched -> IF E THEN matched . ELSE matched
+    (48) unmatched -> IF E THEN matched . ELSE unmatched
+    (43) C -> matched .
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    ELSE            shift and go to state 169
+    END             reduce using rule 43 (C -> matched .)
+    SEMICOLON       reduce using rule 43 (C -> matched .)
+    UNTIL           reduce using rule 43 (C -> matched .)
+
+  ! ELSE            [ reduce using rule 43 (C -> matched .) ]
+
+
+state 135
+
+    (47) unmatched -> IF E THEN C .
+
+    END             reduce using rule 47 (unmatched -> IF E THEN C .)
+    SEMICOLON       reduce using rule 47 (unmatched -> IF E THEN C .)
+    UNTIL           reduce using rule 47 (unmatched -> IF E THEN C .)
+    ELSE            reduce using rule 47 (unmatched -> IF E THEN C .)
+
+
+state 136
+
+    (72) E -> E OR E1 .
+    (74) E1 -> E1 . AND E2
+
+    THEN            reduce using rule 72 (E -> E OR E1 .)
+    OR              reduce using rule 72 (E -> E OR E1 .)
+    DO              reduce using rule 72 (E -> E OR E1 .)
+    PF              reduce using rule 72 (E -> E OR E1 .)
+    COMMA           reduce using rule 72 (E -> E OR E1 .)
+    END             reduce using rule 72 (E -> E OR E1 .)
+    SEMICOLON       reduce using rule 72 (E -> E OR E1 .)
+    UNTIL           reduce using rule 72 (E -> E OR E1 .)
+    ELSE            reduce using rule 72 (E -> E OR E1 .)
+    PRF             reduce using rule 72 (E -> E OR E1 .)
+    TO              reduce using rule 72 (E -> E OR E1 .)
+    DOWNTO          reduce using rule 72 (E -> E OR E1 .)
+    AND             shift and go to state 95
+
+
+state 137
+
+    (74) E1 -> E1 AND E2 .
+
+    AND             reduce using rule 74 (E1 -> E1 AND E2 .)
+    THEN            reduce using rule 74 (E1 -> E1 AND E2 .)
+    OR              reduce using rule 74 (E1 -> E1 AND E2 .)
+    DO              reduce using rule 74 (E1 -> E1 AND E2 .)
+    PF              reduce using rule 74 (E1 -> E1 AND E2 .)
+    COMMA           reduce using rule 74 (E1 -> E1 AND E2 .)
+    END             reduce using rule 74 (E1 -> E1 AND E2 .)
+    SEMICOLON       reduce using rule 74 (E1 -> E1 AND E2 .)
+    UNTIL           reduce using rule 74 (E1 -> E1 AND E2 .)
+    ELSE            reduce using rule 74 (E1 -> E1 AND E2 .)
+    PRF             reduce using rule 74 (E1 -> E1 AND E2 .)
+    TO              reduce using rule 74 (E1 -> E1 AND E2 .)
+    DOWNTO          reduce using rule 74 (E1 -> E1 AND E2 .)
+
+
+state 138
+
+    (76) E2 -> A MENOR A .
+    (83) A -> A . PLUS T
+    (84) A -> A . MINUS T
+
+    AND             reduce using rule 76 (E2 -> A MENOR A .)
+    THEN            reduce using rule 76 (E2 -> A MENOR A .)
+    OR              reduce using rule 76 (E2 -> A MENOR A .)
+    DO              reduce using rule 76 (E2 -> A MENOR A .)
+    PF              reduce using rule 76 (E2 -> A MENOR A .)
+    COMMA           reduce using rule 76 (E2 -> A MENOR A .)
+    END             reduce using rule 76 (E2 -> A MENOR A .)
+    SEMICOLON       reduce using rule 76 (E2 -> A MENOR A .)
+    UNTIL           reduce using rule 76 (E2 -> A MENOR A .)
+    ELSE            reduce using rule 76 (E2 -> A MENOR A .)
+    PRF             reduce using rule 76 (E2 -> A MENOR A .)
+    TO              reduce using rule 76 (E2 -> A MENOR A .)
+    DOWNTO          reduce using rule 76 (E2 -> A MENOR A .)
+    PLUS            shift and go to state 102
+    MINUS           shift and go to state 103
+
+
+state 139
+
+    (77) E2 -> A MAIOR A .
+    (83) A -> A . PLUS T
+    (84) A -> A . MINUS T
+
+    AND             reduce using rule 77 (E2 -> A MAIOR A .)
+    THEN            reduce using rule 77 (E2 -> A MAIOR A .)
+    OR              reduce using rule 77 (E2 -> A MAIOR A .)
+    DO              reduce using rule 77 (E2 -> A MAIOR A .)
+    PF              reduce using rule 77 (E2 -> A MAIOR A .)
+    COMMA           reduce using rule 77 (E2 -> A MAIOR A .)
+    END             reduce using rule 77 (E2 -> A MAIOR A .)
+    SEMICOLON       reduce using rule 77 (E2 -> A MAIOR A .)
+    UNTIL           reduce using rule 77 (E2 -> A MAIOR A .)
+    ELSE            reduce using rule 77 (E2 -> A MAIOR A .)
+    PRF             reduce using rule 77 (E2 -> A MAIOR A .)
+    TO              reduce using rule 77 (E2 -> A MAIOR A .)
+    DOWNTO          reduce using rule 77 (E2 -> A MAIOR A .)
+    PLUS            shift and go to state 102
+    MINUS           shift and go to state 103
+
+
+state 140
+
+    (78) E2 -> A MAIORIGUAL A .
+    (83) A -> A . PLUS T
+    (84) A -> A . MINUS T
+
+    AND             reduce using rule 78 (E2 -> A MAIORIGUAL A .)
+    THEN            reduce using rule 78 (E2 -> A MAIORIGUAL A .)
+    OR              reduce using rule 78 (E2 -> A MAIORIGUAL A .)
+    DO              reduce using rule 78 (E2 -> A MAIORIGUAL A .)
+    PF              reduce using rule 78 (E2 -> A MAIORIGUAL A .)
+    COMMA           reduce using rule 78 (E2 -> A MAIORIGUAL A .)
+    END             reduce using rule 78 (E2 -> A MAIORIGUAL A .)
+    SEMICOLON       reduce using rule 78 (E2 -> A MAIORIGUAL A .)
+    UNTIL           reduce using rule 78 (E2 -> A MAIORIGUAL A .)
+    ELSE            reduce using rule 78 (E2 -> A MAIORIGUAL A .)
+    PRF             reduce using rule 78 (E2 -> A MAIORIGUAL A .)
+    TO              reduce using rule 78 (E2 -> A MAIORIGUAL A .)
+    DOWNTO          reduce using rule 78 (E2 -> A MAIORIGUAL A .)
+    PLUS            shift and go to state 102
+    MINUS           shift and go to state 103
+
+
+state 141
+
+    (79) E2 -> A MENORIGUAL A .
+    (83) A -> A . PLUS T
+    (84) A -> A . MINUS T
+
+    AND             reduce using rule 79 (E2 -> A MENORIGUAL A .)
+    THEN            reduce using rule 79 (E2 -> A MENORIGUAL A .)
+    OR              reduce using rule 79 (E2 -> A MENORIGUAL A .)
+    DO              reduce using rule 79 (E2 -> A MENORIGUAL A .)
+    PF              reduce using rule 79 (E2 -> A MENORIGUAL A .)
+    COMMA           reduce using rule 79 (E2 -> A MENORIGUAL A .)
+    END             reduce using rule 79 (E2 -> A MENORIGUAL A .)
+    SEMICOLON       reduce using rule 79 (E2 -> A MENORIGUAL A .)
+    UNTIL           reduce using rule 79 (E2 -> A MENORIGUAL A .)
+    ELSE            reduce using rule 79 (E2 -> A MENORIGUAL A .)
+    PRF             reduce using rule 79 (E2 -> A MENORIGUAL A .)
+    TO              reduce using rule 79 (E2 -> A MENORIGUAL A .)
+    DOWNTO          reduce using rule 79 (E2 -> A MENORIGUAL A .)
+    PLUS            shift and go to state 102
+    MINUS           shift and go to state 103
+
+
+state 142
+
+    (80) E2 -> A DIFERENTE A .
+    (83) A -> A . PLUS T
+    (84) A -> A . MINUS T
+
+    AND             reduce using rule 80 (E2 -> A DIFERENTE A .)
+    THEN            reduce using rule 80 (E2 -> A DIFERENTE A .)
+    OR              reduce using rule 80 (E2 -> A DIFERENTE A .)
+    DO              reduce using rule 80 (E2 -> A DIFERENTE A .)
+    PF              reduce using rule 80 (E2 -> A DIFERENTE A .)
+    COMMA           reduce using rule 80 (E2 -> A DIFERENTE A .)
+    END             reduce using rule 80 (E2 -> A DIFERENTE A .)
+    SEMICOLON       reduce using rule 80 (E2 -> A DIFERENTE A .)
+    UNTIL           reduce using rule 80 (E2 -> A DIFERENTE A .)
+    ELSE            reduce using rule 80 (E2 -> A DIFERENTE A .)
+    PRF             reduce using rule 80 (E2 -> A DIFERENTE A .)
+    TO              reduce using rule 80 (E2 -> A DIFERENTE A .)
+    DOWNTO          reduce using rule 80 (E2 -> A DIFERENTE A .)
+    PLUS            shift and go to state 102
+    MINUS           shift and go to state 103
+
+
+state 143
+
+    (81) E2 -> A EQUALS A .
+    (83) A -> A . PLUS T
+    (84) A -> A . MINUS T
+
+    AND             reduce using rule 81 (E2 -> A EQUALS A .)
+    THEN            reduce using rule 81 (E2 -> A EQUALS A .)
+    OR              reduce using rule 81 (E2 -> A EQUALS A .)
+    DO              reduce using rule 81 (E2 -> A EQUALS A .)
+    PF              reduce using rule 81 (E2 -> A EQUALS A .)
+    COMMA           reduce using rule 81 (E2 -> A EQUALS A .)
+    END             reduce using rule 81 (E2 -> A EQUALS A .)
+    SEMICOLON       reduce using rule 81 (E2 -> A EQUALS A .)
+    UNTIL           reduce using rule 81 (E2 -> A EQUALS A .)
+    ELSE            reduce using rule 81 (E2 -> A EQUALS A .)
+    PRF             reduce using rule 81 (E2 -> A EQUALS A .)
+    TO              reduce using rule 81 (E2 -> A EQUALS A .)
+    DOWNTO          reduce using rule 81 (E2 -> A EQUALS A .)
+    PLUS            shift and go to state 102
+    MINUS           shift and go to state 103
+
+
+state 144
+
+    (83) A -> A PLUS T .
+    (86) T -> T . MULT F
+    (87) T -> T . DIV F
+    (88) T -> T . MOD F
+
+    MENOR           reduce using rule 83 (A -> A PLUS T .)
+    MAIOR           reduce using rule 83 (A -> A PLUS T .)
+    MAIORIGUAL      reduce using rule 83 (A -> A PLUS T .)
+    MENORIGUAL      reduce using rule 83 (A -> A PLUS T .)
+    DIFERENTE       reduce using rule 83 (A -> A PLUS T .)
+    EQUALS          reduce using rule 83 (A -> A PLUS T .)
+    PLUS            reduce using rule 83 (A -> A PLUS T .)
+    MINUS           reduce using rule 83 (A -> A PLUS T .)
+    AND             reduce using rule 83 (A -> A PLUS T .)
+    THEN            reduce using rule 83 (A -> A PLUS T .)
+    OR              reduce using rule 83 (A -> A PLUS T .)
+    DO              reduce using rule 83 (A -> A PLUS T .)
+    PF              reduce using rule 83 (A -> A PLUS T .)
+    COMMA           reduce using rule 83 (A -> A PLUS T .)
+    END             reduce using rule 83 (A -> A PLUS T .)
+    SEMICOLON       reduce using rule 83 (A -> A PLUS T .)
+    UNTIL           reduce using rule 83 (A -> A PLUS T .)
+    ELSE            reduce using rule 83 (A -> A PLUS T .)
+    PRF             reduce using rule 83 (A -> A PLUS T .)
+    TO              reduce using rule 83 (A -> A PLUS T .)
+    DOWNTO          reduce using rule 83 (A -> A PLUS T .)
+    MULT            shift and go to state 105
+    DIV             shift and go to state 106
+    MOD             shift and go to state 107
+
+
+state 145
+
+    (84) A -> A MINUS T .
+    (86) T -> T . MULT F
+    (87) T -> T . DIV F
+    (88) T -> T . MOD F
+
+    MENOR           reduce using rule 84 (A -> A MINUS T .)
+    MAIOR           reduce using rule 84 (A -> A MINUS T .)
+    MAIORIGUAL      reduce using rule 84 (A -> A MINUS T .)
+    MENORIGUAL      reduce using rule 84 (A -> A MINUS T .)
+    DIFERENTE       reduce using rule 84 (A -> A MINUS T .)
+    EQUALS          reduce using rule 84 (A -> A MINUS T .)
+    PLUS            reduce using rule 84 (A -> A MINUS T .)
+    MINUS           reduce using rule 84 (A -> A MINUS T .)
+    AND             reduce using rule 84 (A -> A MINUS T .)
+    THEN            reduce using rule 84 (A -> A MINUS T .)
+    OR              reduce using rule 84 (A -> A MINUS T .)
+    DO              reduce using rule 84 (A -> A MINUS T .)
+    PF              reduce using rule 84 (A -> A MINUS T .)
+    COMMA           reduce using rule 84 (A -> A MINUS T .)
+    END             reduce using rule 84 (A -> A MINUS T .)
+    SEMICOLON       reduce using rule 84 (A -> A MINUS T .)
+    UNTIL           reduce using rule 84 (A -> A MINUS T .)
+    ELSE            reduce using rule 84 (A -> A MINUS T .)
+    PRF             reduce using rule 84 (A -> A MINUS T .)
+    TO              reduce using rule 84 (A -> A MINUS T .)
+    DOWNTO          reduce using rule 84 (A -> A MINUS T .)
+    MULT            shift and go to state 105
+    DIV             shift and go to state 106
+    MOD             shift and go to state 107
+
+
+state 146
+
+    (86) T -> T MULT F .
+
+    MULT            reduce using rule 86 (T -> T MULT F .)
+    DIV             reduce using rule 86 (T -> T MULT F .)
+    MOD             reduce using rule 86 (T -> T MULT F .)
+    MENOR           reduce using rule 86 (T -> T MULT F .)
+    MAIOR           reduce using rule 86 (T -> T MULT F .)
+    MAIORIGUAL      reduce using rule 86 (T -> T MULT F .)
+    MENORIGUAL      reduce using rule 86 (T -> T MULT F .)
+    DIFERENTE       reduce using rule 86 (T -> T MULT F .)
+    EQUALS          reduce using rule 86 (T -> T MULT F .)
+    PLUS            reduce using rule 86 (T -> T MULT F .)
+    MINUS           reduce using rule 86 (T -> T MULT F .)
+    AND             reduce using rule 86 (T -> T MULT F .)
+    THEN            reduce using rule 86 (T -> T MULT F .)
+    OR              reduce using rule 86 (T -> T MULT F .)
+    DO              reduce using rule 86 (T -> T MULT F .)
+    PF              reduce using rule 86 (T -> T MULT F .)
+    COMMA           reduce using rule 86 (T -> T MULT F .)
+    END             reduce using rule 86 (T -> T MULT F .)
+    SEMICOLON       reduce using rule 86 (T -> T MULT F .)
+    UNTIL           reduce using rule 86 (T -> T MULT F .)
+    ELSE            reduce using rule 86 (T -> T MULT F .)
+    PRF             reduce using rule 86 (T -> T MULT F .)
+    TO              reduce using rule 86 (T -> T MULT F .)
+    DOWNTO          reduce using rule 86 (T -> T MULT F .)
+
+
+state 147
+
+    (87) T -> T DIV F .
+
+    MULT            reduce using rule 87 (T -> T DIV F .)
+    DIV             reduce using rule 87 (T -> T DIV F .)
+    MOD             reduce using rule 87 (T -> T DIV F .)
+    MENOR           reduce using rule 87 (T -> T DIV F .)
+    MAIOR           reduce using rule 87 (T -> T DIV F .)
+    MAIORIGUAL      reduce using rule 87 (T -> T DIV F .)
+    MENORIGUAL      reduce using rule 87 (T -> T DIV F .)
+    DIFERENTE       reduce using rule 87 (T -> T DIV F .)
+    EQUALS          reduce using rule 87 (T -> T DIV F .)
+    PLUS            reduce using rule 87 (T -> T DIV F .)
+    MINUS           reduce using rule 87 (T -> T DIV F .)
+    AND             reduce using rule 87 (T -> T DIV F .)
+    THEN            reduce using rule 87 (T -> T DIV F .)
+    OR              reduce using rule 87 (T -> T DIV F .)
+    DO              reduce using rule 87 (T -> T DIV F .)
+    PF              reduce using rule 87 (T -> T DIV F .)
+    COMMA           reduce using rule 87 (T -> T DIV F .)
+    END             reduce using rule 87 (T -> T DIV F .)
+    SEMICOLON       reduce using rule 87 (T -> T DIV F .)
+    UNTIL           reduce using rule 87 (T -> T DIV F .)
+    ELSE            reduce using rule 87 (T -> T DIV F .)
+    PRF             reduce using rule 87 (T -> T DIV F .)
+    TO              reduce using rule 87 (T -> T DIV F .)
+    DOWNTO          reduce using rule 87 (T -> T DIV F .)
+
+
+state 148
+
+    (88) T -> T MOD F .
+
+    MULT            reduce using rule 88 (T -> T MOD F .)
+    DIV             reduce using rule 88 (T -> T MOD F .)
+    MOD             reduce using rule 88 (T -> T MOD F .)
+    MENOR           reduce using rule 88 (T -> T MOD F .)
+    MAIOR           reduce using rule 88 (T -> T MOD F .)
+    MAIORIGUAL      reduce using rule 88 (T -> T MOD F .)
+    MENORIGUAL      reduce using rule 88 (T -> T MOD F .)
+    DIFERENTE       reduce using rule 88 (T -> T MOD F .)
+    EQUALS          reduce using rule 88 (T -> T MOD F .)
+    PLUS            reduce using rule 88 (T -> T MOD F .)
+    MINUS           reduce using rule 88 (T -> T MOD F .)
+    AND             reduce using rule 88 (T -> T MOD F .)
+    THEN            reduce using rule 88 (T -> T MOD F .)
+    OR              reduce using rule 88 (T -> T MOD F .)
+    DO              reduce using rule 88 (T -> T MOD F .)
+    PF              reduce using rule 88 (T -> T MOD F .)
+    COMMA           reduce using rule 88 (T -> T MOD F .)
+    END             reduce using rule 88 (T -> T MOD F .)
+    SEMICOLON       reduce using rule 88 (T -> T MOD F .)
+    UNTIL           reduce using rule 88 (T -> T MOD F .)
+    ELSE            reduce using rule 88 (T -> T MOD F .)
+    PRF             reduce using rule 88 (T -> T MOD F .)
+    TO              reduce using rule 88 (T -> T MOD F .)
+    DOWNTO          reduce using rule 88 (T -> T MOD F .)
+
+
+state 149
+
+    (90) F -> ID PA AL . PF
+    (70) AL -> AL . COMMA E
+
+    PF              shift and go to state 170
+    COMMA           shift and go to state 152
+
+
+state 150
+
+    (95) F -> PA E PF .
+
+    MULT            reduce using rule 95 (F -> PA E PF .)
+    DIV             reduce using rule 95 (F -> PA E PF .)
+    MOD             reduce using rule 95 (F -> PA E PF .)
+    MENOR           reduce using rule 95 (F -> PA E PF .)
+    MAIOR           reduce using rule 95 (F -> PA E PF .)
+    MAIORIGUAL      reduce using rule 95 (F -> PA E PF .)
+    MENORIGUAL      reduce using rule 95 (F -> PA E PF .)
+    DIFERENTE       reduce using rule 95 (F -> PA E PF .)
+    EQUALS          reduce using rule 95 (F -> PA E PF .)
+    PLUS            reduce using rule 95 (F -> PA E PF .)
+    MINUS           reduce using rule 95 (F -> PA E PF .)
+    AND             reduce using rule 95 (F -> PA E PF .)
+    THEN            reduce using rule 95 (F -> PA E PF .)
+    OR              reduce using rule 95 (F -> PA E PF .)
+    DO              reduce using rule 95 (F -> PA E PF .)
+    PF              reduce using rule 95 (F -> PA E PF .)
+    COMMA           reduce using rule 95 (F -> PA E PF .)
+    END             reduce using rule 95 (F -> PA E PF .)
+    SEMICOLON       reduce using rule 95 (F -> PA E PF .)
+    UNTIL           reduce using rule 95 (F -> PA E PF .)
+    ELSE            reduce using rule 95 (F -> PA E PF .)
+    PRF             reduce using rule 95 (F -> PA E PF .)
+    TO              reduce using rule 95 (F -> PA E PF .)
+    DOWNTO          reduce using rule 95 (F -> PA E PF .)
+
+
+state 151
+
+    (50) Write -> WRITELN PA AL PF .
+
+    END             reduce using rule 50 (Write -> WRITELN PA AL PF .)
+    SEMICOLON       reduce using rule 50 (Write -> WRITELN PA AL PF .)
+    UNTIL           reduce using rule 50 (Write -> WRITELN PA AL PF .)
+    ELSE            reduce using rule 50 (Write -> WRITELN PA AL PF .)
+
+
+state 152
+
+    (70) AL -> AL COMMA . E
+    (72) E -> . E OR E1
+    (73) E -> . E1
+    (74) E1 -> . E1 AND E2
+    (75) E1 -> . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    E                              shift and go to state 171
+    E1                             shift and go to state 52
+    E2                             shift and go to state 53
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 153
+
+    (51) Read -> READLN PA LVALUE_LIST PF .
+
+    END             reduce using rule 51 (Read -> READLN PA LVALUE_LIST PF .)
+    SEMICOLON       reduce using rule 51 (Read -> READLN PA LVALUE_LIST PF .)
+    UNTIL           reduce using rule 51 (Read -> READLN PA LVALUE_LIST PF .)
+    ELSE            reduce using rule 51 (Read -> READLN PA LVALUE_LIST PF .)
+
+
+state 154
+
+    (52) LVALUE_LIST -> LVALUE_LIST COMMA . LVALUE
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 116
+
+    LVALUE                         shift and go to state 172
+
+state 155
+
+    (68) LVALUE -> LVALUE PRA E PRF .
+
+    DOTEDEQUALS     reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    PRA             reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    MULT            reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    DIV             reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    MOD             reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    MENOR           reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    MAIOR           reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    MAIORIGUAL      reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    MENORIGUAL      reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    DIFERENTE       reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    EQUALS          reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    PLUS            reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    MINUS           reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    AND             reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    THEN            reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    OR              reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    DO              reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    PF              reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    COMMA           reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    END             reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    SEMICOLON       reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    UNTIL           reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    ELSE            reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    PRF             reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    TO              reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+    DOWNTO          reduce using rule 68 (LVALUE -> LVALUE PRA E PRF .)
+
+
+state 156
+
+    (55) For -> FOR ID DOTEDEQUALS E . FORDIR E DO C
+    (72) E -> E . OR E1
+    (56) FORDIR -> . TO
+    (57) FORDIR -> . DOWNTO
+
+    OR              shift and go to state 94
+    TO              shift and go to state 174
+    DOWNTO          shift and go to state 175
+
+    FORDIR                         shift and go to state 173
+
+state 157
+
+    (41) Call -> ID PA AL PF .
+
+    END             reduce using rule 41 (Call -> ID PA AL PF .)
+    SEMICOLON       reduce using rule 41 (Call -> ID PA AL PF .)
+    UNTIL           reduce using rule 41 (Call -> ID PA AL PF .)
+    ELSE            reduce using rule 41 (Call -> ID PA AL PF .)
+
+
+state 158
+
+    (58) While -> WHILE E DO C .
+
+    END             reduce using rule 58 (While -> WHILE E DO C .)
+    SEMICOLON       reduce using rule 58 (While -> WHILE E DO C .)
+    UNTIL           reduce using rule 58 (While -> WHILE E DO C .)
+    ELSE            reduce using rule 58 (While -> WHILE E DO C .)
+
+
+state 159
+
+    (49) Repeat -> REPEAT C UNTIL E . SEMICOLON
+    (72) E -> E . OR E1
+
+    SEMICOLON       shift and go to state 176
+    OR              shift and go to state 94
+
+
+state 160
+
+    (13) PARAM -> ID DOUBLEDOT . TIPO
+    (22) TIPO -> . BASE_TIPO
+    (23) TIPO -> . ARRAY_TIPO
+    (24) BASE_TIPO -> . INTEGER
+    (25) BASE_TIPO -> . BOOLEAN
+    (26) BASE_TIPO -> . STRING
+    (27) BASE_TIPO -> . REAL
+    (28) BASE_TIPO -> . CHAR
+    (36) ARRAY_TIPO -> . ARRAY PRA INDEX RANGE INDEX PRF OF BASE_TIPO
+
+    INTEGER         shift and go to state 84
+    BOOLEAN         shift and go to state 85
+    STRING          shift and go to state 86
+    REAL            shift and go to state 87
+    CHAR            shift and go to state 88
+    ARRAY           shift and go to state 89
+
+    TIPO                           shift and go to state 177
+    BASE_TIPO                      shift and go to state 82
+    ARRAY_TIPO                     shift and go to state 83
+
+state 161
+
+    (6) FUNCTION_DECL -> FUNCTION ID PA FPARAMS PF . DOUBLEDOT TIPO SEMICOLON FBLOCK
+
+    DOUBLEDOT       shift and go to state 178
+
+
+state 162
+
+    (11) PARAM_LIST -> PARAM_LIST COMMA . PARAM
+    (13) PARAM -> . ID DOUBLEDOT TIPO
+
+    ID              shift and go to state 123
+
+    PARAM                          shift and go to state 179
+
+state 163
+
+    (7) PROCEDURE_DECL -> PROCEDURE ID PA FPARAMS PF . SEMICOLON FBLOCK
+
+    SEMICOLON       shift and go to state 180
+
+
+state 164
+
+    (14) FBLOCK -> VAR DL . BEGIN CL END SEMICOLON
+    (18) DL -> DL . SEMICOLON D
+
+    BEGIN           shift and go to state 181
+    SEMICOLON       shift and go to state 45
+
+
+state 165
+
+    (15) FBLOCK -> BEGIN CL . END SEMICOLON
+    (39) CL -> CL . SEMICOLON C
+
+    END             shift and go to state 182
+    SEMICOLON       shift and go to state 50
+
+
+state 166
+
+    (36) ARRAY_TIPO -> ARRAY PRA INDEX . RANGE INDEX PRF OF BASE_TIPO
+    (31) INDEX -> INDEX . MINUS NUMS
+    (32) INDEX -> INDEX . PLUS NUMS
+    (33) INDEX -> INDEX . MULT NUMS
+    (34) INDEX -> INDEX . DIV NUMS
+    (35) INDEX -> INDEX . MOD NUMS
+
+    RANGE           shift and go to state 183
+    MINUS           shift and go to state 184
+    PLUS            shift and go to state 185
+    MULT            shift and go to state 186
+    DIV             shift and go to state 187
+    MOD             shift and go to state 188
+
+
+state 167
+
+    (29) INDEX -> NUMS .
+
+    RANGE           reduce using rule 29 (INDEX -> NUMS .)
+    MINUS           reduce using rule 29 (INDEX -> NUMS .)
+    PLUS            reduce using rule 29 (INDEX -> NUMS .)
+    MULT            reduce using rule 29 (INDEX -> NUMS .)
+    DIV             reduce using rule 29 (INDEX -> NUMS .)
+    MOD             reduce using rule 29 (INDEX -> NUMS .)
+    PRF             reduce using rule 29 (INDEX -> NUMS .)
+
+
+state 168
+
+    (30) INDEX -> MINUS . NUMS
+
+    NUMS            shift and go to state 189
+
+
+state 169
+
+    (45) matched -> IF E THEN matched ELSE . matched
+    (48) unmatched -> IF E THEN matched ELSE . unmatched
+    (45) matched -> . IF E THEN matched ELSE matched
+    (46) matched -> . CC
+    (47) unmatched -> . IF E THEN C
+    (48) unmatched -> . IF E THEN matched ELSE unmatched
+    (59) CC -> . Write
+    (60) CC -> . Read
+    (61) CC -> . Assign
+    (62) CC -> . For
+    (63) CC -> . While
+    (64) CC -> . Call
+    (65) CC -> . Repeat
+    (66) CC -> . BEGIN CL END
+    (67) CC -> . empty
+    (50) Write -> . WRITELN PA AL PF
+    (51) Read -> . READLN PA LVALUE_LIST PF
+    (54) Assign -> . LVALUE DOTEDEQUALS E
+    (55) For -> . FOR ID DOTEDEQUALS E FORDIR E DO C
+    (58) While -> . WHILE E DO C
+    (41) Call -> . ID PA AL PF
+    (42) Call -> . ID
+    (49) Repeat -> . REPEAT C UNTIL E SEMICOLON
+    (1) empty -> .
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    IF              shift and go to state 25
+    BEGIN           shift and go to state 20
+    WRITELN         shift and go to state 35
+    READLN          shift and go to state 36
+    FOR             shift and go to state 38
+    WHILE           shift and go to state 40
+    ID              shift and go to state 39
+    REPEAT          shift and go to state 41
+    ELSE            reduce using rule 1 (empty -> .)
+    END             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    UNTIL           reduce using rule 1 (empty -> .)
+
+    matched                        shift and go to state 190
+    unmatched                      shift and go to state 191
+    CC                             shift and go to state 26
+    Write                          shift and go to state 27
+    Read                           shift and go to state 28
+    Assign                         shift and go to state 29
+    For                            shift and go to state 30
+    While                          shift and go to state 31
+    Call                           shift and go to state 32
+    Repeat                         shift and go to state 33
+    empty                          shift and go to state 34
+    LVALUE                         shift and go to state 37
+
+state 170
+
+    (90) F -> ID PA AL PF .
+
+    MULT            reduce using rule 90 (F -> ID PA AL PF .)
+    DIV             reduce using rule 90 (F -> ID PA AL PF .)
+    MOD             reduce using rule 90 (F -> ID PA AL PF .)
+    MENOR           reduce using rule 90 (F -> ID PA AL PF .)
+    MAIOR           reduce using rule 90 (F -> ID PA AL PF .)
+    MAIORIGUAL      reduce using rule 90 (F -> ID PA AL PF .)
+    MENORIGUAL      reduce using rule 90 (F -> ID PA AL PF .)
+    DIFERENTE       reduce using rule 90 (F -> ID PA AL PF .)
+    EQUALS          reduce using rule 90 (F -> ID PA AL PF .)
+    PLUS            reduce using rule 90 (F -> ID PA AL PF .)
+    MINUS           reduce using rule 90 (F -> ID PA AL PF .)
+    AND             reduce using rule 90 (F -> ID PA AL PF .)
+    THEN            reduce using rule 90 (F -> ID PA AL PF .)
+    OR              reduce using rule 90 (F -> ID PA AL PF .)
+    DO              reduce using rule 90 (F -> ID PA AL PF .)
+    PF              reduce using rule 90 (F -> ID PA AL PF .)
+    COMMA           reduce using rule 90 (F -> ID PA AL PF .)
+    END             reduce using rule 90 (F -> ID PA AL PF .)
+    SEMICOLON       reduce using rule 90 (F -> ID PA AL PF .)
+    UNTIL           reduce using rule 90 (F -> ID PA AL PF .)
+    ELSE            reduce using rule 90 (F -> ID PA AL PF .)
+    PRF             reduce using rule 90 (F -> ID PA AL PF .)
+    TO              reduce using rule 90 (F -> ID PA AL PF .)
+    DOWNTO          reduce using rule 90 (F -> ID PA AL PF .)
+
+
+state 171
+
+    (70) AL -> AL COMMA E .
+    (72) E -> E . OR E1
+
+    PF              reduce using rule 70 (AL -> AL COMMA E .)
+    COMMA           reduce using rule 70 (AL -> AL COMMA E .)
+    OR              shift and go to state 94
+
+
+state 172
+
+    (52) LVALUE_LIST -> LVALUE_LIST COMMA LVALUE .
+    (68) LVALUE -> LVALUE . PRA E PRF
+
+    PF              reduce using rule 52 (LVALUE_LIST -> LVALUE_LIST COMMA LVALUE .)
+    COMMA           reduce using rule 52 (LVALUE_LIST -> LVALUE_LIST COMMA LVALUE .)
+    PRA             shift and go to state 71
+
+
+state 173
+
+    (55) For -> FOR ID DOTEDEQUALS E FORDIR . E DO C
+    (72) E -> . E OR E1
+    (73) E -> . E1
+    (74) E1 -> . E1 AND E2
+    (75) E1 -> . E2
+    (76) E2 -> . A MENOR A
+    (77) E2 -> . A MAIOR A
+    (78) E2 -> . A MAIORIGUAL A
+    (79) E2 -> . A MENORIGUAL A
+    (80) E2 -> . A DIFERENTE A
+    (81) E2 -> . A EQUALS A
+    (82) E2 -> . A
+    (83) A -> . A PLUS T
+    (84) A -> . A MINUS T
+    (85) A -> . T
+    (86) T -> . T MULT F
+    (87) T -> . T DIV F
+    (88) T -> . T MOD F
+    (89) T -> . F
+    (90) F -> . ID PA AL PF
+    (91) F -> . LVALUE
+    (92) F -> . NUMS
+    (93) F -> . NUM_REAL
+    (94) F -> . STRINGS
+    (95) F -> . PA E PF
+    (96) F -> . TRUE
+    (97) F -> . FALSE
+    (98) F -> . NOT F
+    (99) F -> . MINUS F
+    (100) F -> . PLUS F
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    ID              shift and go to state 59
+    NUMS            shift and go to state 62
+    NUM_REAL        shift and go to state 63
+    STRINGS         shift and go to state 64
+    PA              shift and go to state 60
+    TRUE            shift and go to state 65
+    FALSE           shift and go to state 66
+    NOT             shift and go to state 67
+    MINUS           shift and go to state 57
+    PLUS            shift and go to state 55
+
+    E                              shift and go to state 192
+    E1                             shift and go to state 52
+    E2                             shift and go to state 53
+    A                              shift and go to state 54
+    T                              shift and go to state 56
+    F                              shift and go to state 58
+    LVALUE                         shift and go to state 61
+
+state 174
+
+    (56) FORDIR -> TO .
+
+    ID              reduce using rule 56 (FORDIR -> TO .)
+    NUMS            reduce using rule 56 (FORDIR -> TO .)
+    NUM_REAL        reduce using rule 56 (FORDIR -> TO .)
+    STRINGS         reduce using rule 56 (FORDIR -> TO .)
+    PA              reduce using rule 56 (FORDIR -> TO .)
+    TRUE            reduce using rule 56 (FORDIR -> TO .)
+    FALSE           reduce using rule 56 (FORDIR -> TO .)
+    NOT             reduce using rule 56 (FORDIR -> TO .)
+    MINUS           reduce using rule 56 (FORDIR -> TO .)
+    PLUS            reduce using rule 56 (FORDIR -> TO .)
+
+
+state 175
+
+    (57) FORDIR -> DOWNTO .
+
+    ID              reduce using rule 57 (FORDIR -> DOWNTO .)
+    NUMS            reduce using rule 57 (FORDIR -> DOWNTO .)
+    NUM_REAL        reduce using rule 57 (FORDIR -> DOWNTO .)
+    STRINGS         reduce using rule 57 (FORDIR -> DOWNTO .)
+    PA              reduce using rule 57 (FORDIR -> DOWNTO .)
+    TRUE            reduce using rule 57 (FORDIR -> DOWNTO .)
+    FALSE           reduce using rule 57 (FORDIR -> DOWNTO .)
+    NOT             reduce using rule 57 (FORDIR -> DOWNTO .)
+    MINUS           reduce using rule 57 (FORDIR -> DOWNTO .)
+    PLUS            reduce using rule 57 (FORDIR -> DOWNTO .)
+
+
+state 176
+
+    (49) Repeat -> REPEAT C UNTIL E SEMICOLON .
+
+    END             reduce using rule 49 (Repeat -> REPEAT C UNTIL E SEMICOLON .)
+    SEMICOLON       reduce using rule 49 (Repeat -> REPEAT C UNTIL E SEMICOLON .)
+    UNTIL           reduce using rule 49 (Repeat -> REPEAT C UNTIL E SEMICOLON .)
+    ELSE            reduce using rule 49 (Repeat -> REPEAT C UNTIL E SEMICOLON .)
+
+
+state 177
+
+    (13) PARAM -> ID DOUBLEDOT TIPO .
+
+    COMMA           reduce using rule 13 (PARAM -> ID DOUBLEDOT TIPO .)
+    PF              reduce using rule 13 (PARAM -> ID DOUBLEDOT TIPO .)
+
+
+state 178
+
+    (6) FUNCTION_DECL -> FUNCTION ID PA FPARAMS PF DOUBLEDOT . TIPO SEMICOLON FBLOCK
+    (22) TIPO -> . BASE_TIPO
+    (23) TIPO -> . ARRAY_TIPO
+    (24) BASE_TIPO -> . INTEGER
+    (25) BASE_TIPO -> . BOOLEAN
+    (26) BASE_TIPO -> . STRING
+    (27) BASE_TIPO -> . REAL
+    (28) BASE_TIPO -> . CHAR
+    (36) ARRAY_TIPO -> . ARRAY PRA INDEX RANGE INDEX PRF OF BASE_TIPO
+
+    INTEGER         shift and go to state 84
+    BOOLEAN         shift and go to state 85
+    STRING          shift and go to state 86
+    REAL            shift and go to state 87
+    CHAR            shift and go to state 88
+    ARRAY           shift and go to state 89
+
+    TIPO                           shift and go to state 193
+    BASE_TIPO                      shift and go to state 82
+    ARRAY_TIPO                     shift and go to state 83
+
+state 179
+
+    (11) PARAM_LIST -> PARAM_LIST COMMA PARAM .
+
+    COMMA           reduce using rule 11 (PARAM_LIST -> PARAM_LIST COMMA PARAM .)
+    PF              reduce using rule 11 (PARAM_LIST -> PARAM_LIST COMMA PARAM .)
+
+
+state 180
+
+    (7) PROCEDURE_DECL -> PROCEDURE ID PA FPARAMS PF SEMICOLON . FBLOCK
+    (14) FBLOCK -> . VAR DL BEGIN CL END SEMICOLON
+    (15) FBLOCK -> . BEGIN CL END SEMICOLON
+
+    VAR             shift and go to state 130
+    BEGIN           shift and go to state 131
+
+    FBLOCK                         shift and go to state 194
+
+state 181
+
+    (14) FBLOCK -> VAR DL BEGIN . CL END SEMICOLON
+    (39) CL -> . CL SEMICOLON C
+    (40) CL -> . C
+    (43) C -> . matched
+    (44) C -> . unmatched
+    (45) matched -> . IF E THEN matched ELSE matched
+    (46) matched -> . CC
+    (47) unmatched -> . IF E THEN C
+    (48) unmatched -> . IF E THEN matched ELSE unmatched
+    (59) CC -> . Write
+    (60) CC -> . Read
+    (61) CC -> . Assign
+    (62) CC -> . For
+    (63) CC -> . While
+    (64) CC -> . Call
+    (65) CC -> . Repeat
+    (66) CC -> . BEGIN CL END
+    (67) CC -> . empty
+    (50) Write -> . WRITELN PA AL PF
+    (51) Read -> . READLN PA LVALUE_LIST PF
+    (54) Assign -> . LVALUE DOTEDEQUALS E
+    (55) For -> . FOR ID DOTEDEQUALS E FORDIR E DO C
+    (58) While -> . WHILE E DO C
+    (41) Call -> . ID PA AL PF
+    (42) Call -> . ID
+    (49) Repeat -> . REPEAT C UNTIL E SEMICOLON
+    (1) empty -> .
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    IF              shift and go to state 25
+    BEGIN           shift and go to state 20
+    WRITELN         shift and go to state 35
+    READLN          shift and go to state 36
+    FOR             shift and go to state 38
+    WHILE           shift and go to state 40
+    ID              shift and go to state 39
+    REPEAT          shift and go to state 41
+    END             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+
+    CL                             shift and go to state 195
+    C                              shift and go to state 22
+    matched                        shift and go to state 23
+    unmatched                      shift and go to state 24
+    CC                             shift and go to state 26
+    Write                          shift and go to state 27
+    Read                           shift and go to state 28
+    Assign                         shift and go to state 29
+    For                            shift and go to state 30
+    While                          shift and go to state 31
+    Call                           shift and go to state 32
+    Repeat                         shift and go to state 33
+    empty                          shift and go to state 34
+    LVALUE                         shift and go to state 37
+
+state 182
+
+    (15) FBLOCK -> BEGIN CL END . SEMICOLON
+
+    SEMICOLON       shift and go to state 196
+
+
+state 183
+
+    (36) ARRAY_TIPO -> ARRAY PRA INDEX RANGE . INDEX PRF OF BASE_TIPO
+    (29) INDEX -> . NUMS
+    (30) INDEX -> . MINUS NUMS
+    (31) INDEX -> . INDEX MINUS NUMS
+    (32) INDEX -> . INDEX PLUS NUMS
+    (33) INDEX -> . INDEX MULT NUMS
+    (34) INDEX -> . INDEX DIV NUMS
+    (35) INDEX -> . INDEX MOD NUMS
+
+    NUMS            shift and go to state 167
+    MINUS           shift and go to state 168
+
+    INDEX                          shift and go to state 197
+
+state 184
+
+    (31) INDEX -> INDEX MINUS . NUMS
+
+    NUMS            shift and go to state 198
+
+
+state 185
+
+    (32) INDEX -> INDEX PLUS . NUMS
+
+    NUMS            shift and go to state 199
+
+
+state 186
+
+    (33) INDEX -> INDEX MULT . NUMS
+
+    NUMS            shift and go to state 200
+
+
+state 187
+
+    (34) INDEX -> INDEX DIV . NUMS
+
+    NUMS            shift and go to state 201
+
+
+state 188
+
+    (35) INDEX -> INDEX MOD . NUMS
+
+    NUMS            shift and go to state 202
+
+
+state 189
+
+    (30) INDEX -> MINUS NUMS .
+
+    RANGE           reduce using rule 30 (INDEX -> MINUS NUMS .)
+    MINUS           reduce using rule 30 (INDEX -> MINUS NUMS .)
+    PLUS            reduce using rule 30 (INDEX -> MINUS NUMS .)
+    MULT            reduce using rule 30 (INDEX -> MINUS NUMS .)
+    DIV             reduce using rule 30 (INDEX -> MINUS NUMS .)
+    MOD             reduce using rule 30 (INDEX -> MINUS NUMS .)
+    PRF             reduce using rule 30 (INDEX -> MINUS NUMS .)
+
+
+state 190
+
+    (45) matched -> IF E THEN matched ELSE matched .
+
+    END             reduce using rule 45 (matched -> IF E THEN matched ELSE matched .)
+    SEMICOLON       reduce using rule 45 (matched -> IF E THEN matched ELSE matched .)
+    UNTIL           reduce using rule 45 (matched -> IF E THEN matched ELSE matched .)
+    ELSE            reduce using rule 45 (matched -> IF E THEN matched ELSE matched .)
+
+
+state 191
+
+    (48) unmatched -> IF E THEN matched ELSE unmatched .
+
+    END             reduce using rule 48 (unmatched -> IF E THEN matched ELSE unmatched .)
+    SEMICOLON       reduce using rule 48 (unmatched -> IF E THEN matched ELSE unmatched .)
+    UNTIL           reduce using rule 48 (unmatched -> IF E THEN matched ELSE unmatched .)
+    ELSE            reduce using rule 48 (unmatched -> IF E THEN matched ELSE unmatched .)
+
+
+state 192
+
+    (55) For -> FOR ID DOTEDEQUALS E FORDIR E . DO C
+    (72) E -> E . OR E1
+
+    DO              shift and go to state 203
+    OR              shift and go to state 94
+
+
+state 193
+
+    (6) FUNCTION_DECL -> FUNCTION ID PA FPARAMS PF DOUBLEDOT TIPO . SEMICOLON FBLOCK
+
+    SEMICOLON       shift and go to state 204
+
+
+state 194
+
+    (7) PROCEDURE_DECL -> PROCEDURE ID PA FPARAMS PF SEMICOLON FBLOCK .
+
+    VAR             reduce using rule 7 (PROCEDURE_DECL -> PROCEDURE ID PA FPARAMS PF SEMICOLON FBLOCK .)
+    BEGIN           reduce using rule 7 (PROCEDURE_DECL -> PROCEDURE ID PA FPARAMS PF SEMICOLON FBLOCK .)
+    FUNCTION        reduce using rule 7 (PROCEDURE_DECL -> PROCEDURE ID PA FPARAMS PF SEMICOLON FBLOCK .)
+    PROCEDURE       reduce using rule 7 (PROCEDURE_DECL -> PROCEDURE ID PA FPARAMS PF SEMICOLON FBLOCK .)
+
+
+state 195
+
+    (14) FBLOCK -> VAR DL BEGIN CL . END SEMICOLON
+    (39) CL -> CL . SEMICOLON C
+
+    END             shift and go to state 205
+    SEMICOLON       shift and go to state 50
+
+
+state 196
+
+    (15) FBLOCK -> BEGIN CL END SEMICOLON .
+
+    VAR             reduce using rule 15 (FBLOCK -> BEGIN CL END SEMICOLON .)
+    BEGIN           reduce using rule 15 (FBLOCK -> BEGIN CL END SEMICOLON .)
+    FUNCTION        reduce using rule 15 (FBLOCK -> BEGIN CL END SEMICOLON .)
+    PROCEDURE       reduce using rule 15 (FBLOCK -> BEGIN CL END SEMICOLON .)
+
+
+state 197
+
+    (36) ARRAY_TIPO -> ARRAY PRA INDEX RANGE INDEX . PRF OF BASE_TIPO
+    (31) INDEX -> INDEX . MINUS NUMS
+    (32) INDEX -> INDEX . PLUS NUMS
+    (33) INDEX -> INDEX . MULT NUMS
+    (34) INDEX -> INDEX . DIV NUMS
+    (35) INDEX -> INDEX . MOD NUMS
+
+    PRF             shift and go to state 206
+    MINUS           shift and go to state 184
+    PLUS            shift and go to state 185
+    MULT            shift and go to state 186
+    DIV             shift and go to state 187
+    MOD             shift and go to state 188
+
+
+state 198
+
+    (31) INDEX -> INDEX MINUS NUMS .
+
+    RANGE           reduce using rule 31 (INDEX -> INDEX MINUS NUMS .)
+    MINUS           reduce using rule 31 (INDEX -> INDEX MINUS NUMS .)
+    PLUS            reduce using rule 31 (INDEX -> INDEX MINUS NUMS .)
+    MULT            reduce using rule 31 (INDEX -> INDEX MINUS NUMS .)
+    DIV             reduce using rule 31 (INDEX -> INDEX MINUS NUMS .)
+    MOD             reduce using rule 31 (INDEX -> INDEX MINUS NUMS .)
+    PRF             reduce using rule 31 (INDEX -> INDEX MINUS NUMS .)
+
+
+state 199
+
+    (32) INDEX -> INDEX PLUS NUMS .
+
+    RANGE           reduce using rule 32 (INDEX -> INDEX PLUS NUMS .)
+    MINUS           reduce using rule 32 (INDEX -> INDEX PLUS NUMS .)
+    PLUS            reduce using rule 32 (INDEX -> INDEX PLUS NUMS .)
+    MULT            reduce using rule 32 (INDEX -> INDEX PLUS NUMS .)
+    DIV             reduce using rule 32 (INDEX -> INDEX PLUS NUMS .)
+    MOD             reduce using rule 32 (INDEX -> INDEX PLUS NUMS .)
+    PRF             reduce using rule 32 (INDEX -> INDEX PLUS NUMS .)
+
+
+state 200
+
+    (33) INDEX -> INDEX MULT NUMS .
+
+    RANGE           reduce using rule 33 (INDEX -> INDEX MULT NUMS .)
+    MINUS           reduce using rule 33 (INDEX -> INDEX MULT NUMS .)
+    PLUS            reduce using rule 33 (INDEX -> INDEX MULT NUMS .)
+    MULT            reduce using rule 33 (INDEX -> INDEX MULT NUMS .)
+    DIV             reduce using rule 33 (INDEX -> INDEX MULT NUMS .)
+    MOD             reduce using rule 33 (INDEX -> INDEX MULT NUMS .)
+    PRF             reduce using rule 33 (INDEX -> INDEX MULT NUMS .)
+
+
+state 201
+
+    (34) INDEX -> INDEX DIV NUMS .
+
+    RANGE           reduce using rule 34 (INDEX -> INDEX DIV NUMS .)
+    MINUS           reduce using rule 34 (INDEX -> INDEX DIV NUMS .)
+    PLUS            reduce using rule 34 (INDEX -> INDEX DIV NUMS .)
+    MULT            reduce using rule 34 (INDEX -> INDEX DIV NUMS .)
+    DIV             reduce using rule 34 (INDEX -> INDEX DIV NUMS .)
+    MOD             reduce using rule 34 (INDEX -> INDEX DIV NUMS .)
+    PRF             reduce using rule 34 (INDEX -> INDEX DIV NUMS .)
+
+
+state 202
+
+    (35) INDEX -> INDEX MOD NUMS .
+
+    RANGE           reduce using rule 35 (INDEX -> INDEX MOD NUMS .)
+    MINUS           reduce using rule 35 (INDEX -> INDEX MOD NUMS .)
+    PLUS            reduce using rule 35 (INDEX -> INDEX MOD NUMS .)
+    MULT            reduce using rule 35 (INDEX -> INDEX MOD NUMS .)
+    DIV             reduce using rule 35 (INDEX -> INDEX MOD NUMS .)
+    MOD             reduce using rule 35 (INDEX -> INDEX MOD NUMS .)
+    PRF             reduce using rule 35 (INDEX -> INDEX MOD NUMS .)
+
+
+state 203
+
+    (55) For -> FOR ID DOTEDEQUALS E FORDIR E DO . C
+    (43) C -> . matched
+    (44) C -> . unmatched
+    (45) matched -> . IF E THEN matched ELSE matched
+    (46) matched -> . CC
+    (47) unmatched -> . IF E THEN C
+    (48) unmatched -> . IF E THEN matched ELSE unmatched
+    (59) CC -> . Write
+    (60) CC -> . Read
+    (61) CC -> . Assign
+    (62) CC -> . For
+    (63) CC -> . While
+    (64) CC -> . Call
+    (65) CC -> . Repeat
+    (66) CC -> . BEGIN CL END
+    (67) CC -> . empty
+    (50) Write -> . WRITELN PA AL PF
+    (51) Read -> . READLN PA LVALUE_LIST PF
+    (54) Assign -> . LVALUE DOTEDEQUALS E
+    (55) For -> . FOR ID DOTEDEQUALS E FORDIR E DO C
+    (58) While -> . WHILE E DO C
+    (41) Call -> . ID PA AL PF
+    (42) Call -> . ID
+    (49) Repeat -> . REPEAT C UNTIL E SEMICOLON
+    (1) empty -> .
+    (68) LVALUE -> . LVALUE PRA E PRF
+    (69) LVALUE -> . ID
+
+    IF              shift and go to state 25
+    BEGIN           shift and go to state 20
+    WRITELN         shift and go to state 35
+    READLN          shift and go to state 36
+    FOR             shift and go to state 38
+    WHILE           shift and go to state 40
+    ID              shift and go to state 39
+    REPEAT          shift and go to state 41
+    ELSE            reduce using rule 1 (empty -> .)
+    END             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    UNTIL           reduce using rule 1 (empty -> .)
+
+    C                              shift and go to state 207
+    matched                        shift and go to state 23
+    unmatched                      shift and go to state 24
+    CC                             shift and go to state 26
+    Write                          shift and go to state 27
+    Read                           shift and go to state 28
+    Assign                         shift and go to state 29
+    For                            shift and go to state 30
+    While                          shift and go to state 31
+    Call                           shift and go to state 32
+    Repeat                         shift and go to state 33
+    empty                          shift and go to state 34
+    LVALUE                         shift and go to state 37
+
+state 204
+
+    (6) FUNCTION_DECL -> FUNCTION ID PA FPARAMS PF DOUBLEDOT TIPO SEMICOLON . FBLOCK
+    (14) FBLOCK -> . VAR DL BEGIN CL END SEMICOLON
+    (15) FBLOCK -> . BEGIN CL END SEMICOLON
+
+    VAR             shift and go to state 130
+    BEGIN           shift and go to state 131
+
+    FBLOCK                         shift and go to state 208
+
+state 205
+
+    (14) FBLOCK -> VAR DL BEGIN CL END . SEMICOLON
+
+    SEMICOLON       shift and go to state 209
+
+
+state 206
+
+    (36) ARRAY_TIPO -> ARRAY PRA INDEX RANGE INDEX PRF . OF BASE_TIPO
+
+    OF              shift and go to state 210
+
+
+state 207
+
+    (55) For -> FOR ID DOTEDEQUALS E FORDIR E DO C .
+
+    END             reduce using rule 55 (For -> FOR ID DOTEDEQUALS E FORDIR E DO C .)
+    SEMICOLON       reduce using rule 55 (For -> FOR ID DOTEDEQUALS E FORDIR E DO C .)
+    UNTIL           reduce using rule 55 (For -> FOR ID DOTEDEQUALS E FORDIR E DO C .)
+    ELSE            reduce using rule 55 (For -> FOR ID DOTEDEQUALS E FORDIR E DO C .)
+
+
+state 208
+
+    (6) FUNCTION_DECL -> FUNCTION ID PA FPARAMS PF DOUBLEDOT TIPO SEMICOLON FBLOCK .
+
+    VAR             reduce using rule 6 (FUNCTION_DECL -> FUNCTION ID PA FPARAMS PF DOUBLEDOT TIPO SEMICOLON FBLOCK .)
+    BEGIN           reduce using rule 6 (FUNCTION_DECL -> FUNCTION ID PA FPARAMS PF DOUBLEDOT TIPO SEMICOLON FBLOCK .)
+    FUNCTION        reduce using rule 6 (FUNCTION_DECL -> FUNCTION ID PA FPARAMS PF DOUBLEDOT TIPO SEMICOLON FBLOCK .)
+    PROCEDURE       reduce using rule 6 (FUNCTION_DECL -> FUNCTION ID PA FPARAMS PF DOUBLEDOT TIPO SEMICOLON FBLOCK .)
+
+
+state 209
+
+    (14) FBLOCK -> VAR DL BEGIN CL END SEMICOLON .
+
+    VAR             reduce using rule 14 (FBLOCK -> VAR DL BEGIN CL END SEMICOLON .)
+    BEGIN           reduce using rule 14 (FBLOCK -> VAR DL BEGIN CL END SEMICOLON .)
+    FUNCTION        reduce using rule 14 (FBLOCK -> VAR DL BEGIN CL END SEMICOLON .)
+    PROCEDURE       reduce using rule 14 (FBLOCK -> VAR DL BEGIN CL END SEMICOLON .)
+
+
+state 210
+
+    (36) ARRAY_TIPO -> ARRAY PRA INDEX RANGE INDEX PRF OF . BASE_TIPO
+    (24) BASE_TIPO -> . INTEGER
+    (25) BASE_TIPO -> . BOOLEAN
+    (26) BASE_TIPO -> . STRING
+    (27) BASE_TIPO -> . REAL
+    (28) BASE_TIPO -> . CHAR
+
+    INTEGER         shift and go to state 84
+    BOOLEAN         shift and go to state 85
+    STRING          shift and go to state 86
+    REAL            shift and go to state 87
+    CHAR            shift and go to state 88
+
+    BASE_TIPO                      shift and go to state 211
+
+state 211
+
+    (36) ARRAY_TIPO -> ARRAY PRA INDEX RANGE INDEX PRF OF BASE_TIPO .
+
+    BEGIN           reduce using rule 36 (ARRAY_TIPO -> ARRAY PRA INDEX RANGE INDEX PRF OF BASE_TIPO .)
+    SEMICOLON       reduce using rule 36 (ARRAY_TIPO -> ARRAY PRA INDEX RANGE INDEX PRF OF BASE_TIPO .)
+    COMMA           reduce using rule 36 (ARRAY_TIPO -> ARRAY PRA INDEX RANGE INDEX PRF OF BASE_TIPO .)
+    PF              reduce using rule 36 (ARRAY_TIPO -> ARRAY PRA INDEX RANGE INDEX PRF OF BASE_TIPO .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ELSE in state 134 resolved as shift
