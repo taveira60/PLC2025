@@ -188,13 +188,12 @@ def visit(node):
                 emite(f"{function_labels[name]}:")
 
                 if params:
-                    #idx = -global_var_count - 1
                     idx = -(len(params))
                     for p_name, p_type in reversed(params):
                         local_var_map[p_name] = idx
                         local_type_map[p_name] = p_type
                         idx += 1
-                        #idx -= 1
+                        
 
                 if tipo == 'function':
                     local_var_map[name] = local_var_count
@@ -268,7 +267,7 @@ def visit(node):
                     emite(f"PUSHA {function_labels[func_name]}")
                     emite("CALL")
                 else:
-                    print(f"[AVISO] chamada desconhecida {func_name}")
+                    print(f" Chamada desconhecida {func_name}")
                 return
 
             if tipo == 'assign':
