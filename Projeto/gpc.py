@@ -6,7 +6,7 @@ from parser import parser
 from semantics import SemanticAnalyzer
 import testes
 
-result = parser.parse(testes.teste_rec, lexer=lexer)
+result = parser.parse(testes.exemplo5, lexer=lexer)
 
 if parser.success:
     print(result)
@@ -14,7 +14,7 @@ if parser.success:
 
     # Verifica se a semântica aprova
     if analyzer.analyze(result):
-        print("\n[INFO] Análise Semântica: SUCESSO.")
+        print("\nAnálise Semântica: Passou.")
         print("="*40)
        # analyzer.print_symbol_table();
 
@@ -26,7 +26,7 @@ if parser.success:
             webauto.abrir_e_colar(codigo_final)
 
     else:
-        print("\n[ERRO] Falha na Semântica. Código não gerado.")
+        print("\nFalha na Semântica. Código não gerado.")
         analyzer.print_errors()
         analyzer.print_symbol_table()
 else:
